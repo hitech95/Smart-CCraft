@@ -1,0 +1,16 @@
+[
+{
+  "modid": "smartccraft",
+  "name": "Smart CCraft",
+  "description": "Make CCraft more smart!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["hitech95"],
+  "credits": "The Forge and FML guys, for making forge API.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

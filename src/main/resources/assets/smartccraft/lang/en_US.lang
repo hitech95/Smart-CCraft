@@ -1,0 +1,11 @@
+# Key localizations
+key.categories.scc=Smart CCraft
+
+# Item localizations
+
+# Block localizations
+tile.smartccraft:assemblerBlock.name=Assembly Station
+tile.smartccraft:chargeStation.name=Charge Station
+
+# GUI localizations
+container.smartccraft:chargeStation=Charge Station
