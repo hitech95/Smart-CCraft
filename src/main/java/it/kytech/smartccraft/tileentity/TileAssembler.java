@@ -9,30 +9,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 /**
- * Created by M2K on 29/06/2014.
+ * Created by M2K on 30/06/2014.
  */
-public class TileChargeStation extends TileEntitySCC implements IInventory {
-
-    public final int tier;
+public class TileAssembler extends TileEntitySCC implements IInventory {
     public double energy = 0;
-    public int limit = 0;
-    public boolean addedToEnergyNet = false;
-    public boolean addedToUE = false;
-    public Object bcProvider;
     ItemStack[] inventory;
 
-    public TileChargeStation() {
-        this(0);
-    }
-
-    public TileChargeStation(int tier) {
-        inventory = new ItemStack[1];
-
-        this.tier = tier;
+    public TileAssembler() {
+        inventory = new ItemStack[5];
     }
 
     public int getMaxCharge() {
-        return Energy.CHARGE_STATION * (int) Math.pow(10, tier + 1);
+        return Energy.ASSEMBLER;
     }
 
     @Override
@@ -87,7 +75,7 @@ public class TileChargeStation extends TileEntitySCC implements IInventory {
 
     @Override
     public String getInventoryName() {
-        return this.hasCustomName() ? this.getCustomName() : Names.Containers.CHARGE_STATION;
+        return this.hasCustomName() ? this.getCustomName() : Names.Containers.ASSEMBLER;
     }
 
     @Override
@@ -152,5 +140,4 @@ public class TileChargeStation extends TileEntitySCC implements IInventory {
         }
         tag.setTag("Items", tagList);
     }
-
 }

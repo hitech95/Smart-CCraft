@@ -1,9 +1,7 @@
 package it.kytech.smartccraft.tileentity;
 
 import it.kytech.smartccraft.reference.Names;
-import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 

@@ -5,8 +5,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import it.kytech.smartccraft.configuration.ConfigurationHandler;
 import it.kytech.smartccraft.handler.GuiHandler;
 import it.kytech.smartccraft.init.BlocksLoader;
 import it.kytech.smartccraft.init.ItemsLoader;
@@ -23,12 +23,8 @@ public class SmartCCraft {
     public static IProxy proxy;
 
     @Mod.EventHandler
-    public void serverStarting(FMLServerStartingEvent event) {
-
-    }
-
-    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
         ItemsLoader.init();
         BlocksLoader.init();

@@ -7,7 +7,6 @@ import it.kytech.smartccraft.creativetab.CreativeTab;
 import it.kytech.smartccraft.reference.Textures;
 import it.kytech.smartccraft.tileentity.TileEntitySCC;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -74,10 +73,10 @@ public class BlockSCC extends Block {
 
             if (pitch >= 65) direction = ForgeDirection.UP.ordinal();
             else if (pitch <= -65) direction = ForgeDirection.DOWN.ordinal();
-            else if (yaw == 0) direction = ForgeDirection.EAST.ordinal();
-            else if (yaw == 1) direction = ForgeDirection.SOUTH.ordinal();
-            else if (yaw == 2) direction = ForgeDirection.WEST.ordinal();
-            else direction = ForgeDirection.NORTH.ordinal();
+            else if (yaw == 0) direction = ForgeDirection.NORTH.ordinal();
+            else if (yaw == 1) direction = ForgeDirection.EAST.ordinal();
+            else if (yaw == 2) direction = ForgeDirection.SOUTH.ordinal();
+            else direction = ForgeDirection.WEST.ordinal();
 
             if (itemStack.hasDisplayName()) {
                 ((TileEntitySCC) world.getTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());

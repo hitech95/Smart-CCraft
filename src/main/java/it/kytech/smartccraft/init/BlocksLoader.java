@@ -16,6 +16,6 @@ public class BlocksLoader {
 
     public static void init() {
         GameRegistry.registerBlock(assemblerBlock, Names.Blocks.ASSEMBLER);
-        GameRegistry.registerBlock(stationBlock, ItemBlockChargeStation.class,Names.Blocks.CHARGE_STATION);
+        GameRegistry.registerBlock(stationBlock, ItemBlockChargeStation.class, Names.Blocks.CHARGE_STATION);
     }
 }

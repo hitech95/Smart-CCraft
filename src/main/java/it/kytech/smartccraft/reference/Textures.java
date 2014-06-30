@@ -22,6 +22,7 @@ public class Textures {
     public static final String GUI_SHEET_LOCATION = "textures/gui/";
 
     public static final ResourceLocation GUI_CHARGE_STATION = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "chargestation.png");
+    public static final ResourceLocation GUI_ASSEMBLER = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "assembler.png");
 
     // Effect textures
     public static final String EFFECTS_LOCATION = "textures/effects/";

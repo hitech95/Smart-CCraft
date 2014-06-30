@@ -1,7 +1,6 @@
 package it.kytech.smartccraft.inventory;
 
 import it.kytech.smartccraft.tileentity.TileChargeStation;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
@@ -11,7 +10,7 @@ import java.util.List;
 /**
  * Created by M2K on 29/06/2014.
  */
-public class ContainerChargeStation extends ContainerCommon {
+public class ContainerChargeStation extends ContainerSCC {
     public TileChargeStation tileChargeStation;
     private int lastEnergy;
 

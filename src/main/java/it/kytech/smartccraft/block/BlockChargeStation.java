@@ -87,15 +87,14 @@ public class BlockChargeStation extends BlockSCC implements ITileEntityProvider 
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
-
+    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if ((tileEntity instanceof TileChargeStation)) {
             TileChargeStation tileChargeStation = (TileChargeStation) tileEntity;
             ForgeDirection direction = tileChargeStation.getOrientation();
 
-           return getIcon(SIDE_OFFSETS[direction.ordinal()][side], tileChargeStation.tier);
+            return getIcon(SIDE_OFFSETS[direction.ordinal()][side], tileChargeStation.tier);
         }
 
         return null;
@@ -109,7 +108,6 @@ public class BlockChargeStation extends BlockSCC implements ITileEntityProvider 
         }
 
         return true;
-
     }
 
     @Override

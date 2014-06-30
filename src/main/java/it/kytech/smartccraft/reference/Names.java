@@ -35,6 +35,7 @@ public class Names {
     public static class Containers {
         public static final String VANILLA_INVENTORY = "container.inventory";
         public static final String VANILLA_CRAFTING = "container.crafting";
+        public static final String ASSEMBLER = "container.smartccraft:" + Blocks.ASSEMBLER;
         public static final String CHARGE_STATION = "container.smartccraft:" + Blocks.CHARGE_STATION;
         public static final String CHARGE_STATION_2 = "container.smartccraft:" + Blocks.CHARGE_STATION_2;
         public static final String CHARGE_STATION_3 = "container.smartccraft:" + Blocks.CHARGE_STATION_3;
