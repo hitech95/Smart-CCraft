@@ -28,17 +28,16 @@ import java.util.List;
 public class BlockChargeStation extends BlockSCC implements ITileEntityProvider {
 
     @SideOnly(Side.CLIENT)
-    IIcon[] blockIconFront;
+    private IIcon[] blockIconFront;
     @SideOnly(Side.CLIENT)
-    IIcon[] blockIconSide;
+    private IIcon[] blockIconSide;
+
+    public static final int MAX_TIER = 4;
 
     public BlockChargeStation() {
         super(Material.rock);
         this.setHardness(1.0f);
         this.setBlockName(Names.Blocks.CHARGE_STATION);
-
-        blockIconFront = new IIcon[4];
-        blockIconSide = new IIcon[4];
     }
 
     @Override
@@ -65,11 +64,10 @@ public class BlockChargeStation extends BlockSCC implements ITileEntityProvider 
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
 
+        blockIconFront = new IIcon[MAX_TIER];
+        blockIconSide = new IIcon[MAX_TIER];
+
         for (int meta = 0; meta < 4; meta++) {
-
-            LogHelper.info(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())) + "_" + meta);
-            LogHelper.info(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())) + "_" + meta + "_front");
-
             blockIconSide[meta] = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())) + "_" + meta);
             blockIconFront[meta] = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName()) + "_" + meta + "_front"));
         }

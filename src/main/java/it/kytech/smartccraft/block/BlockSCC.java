@@ -4,6 +4,7 @@ package it.kytech.smartccraft.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import it.kytech.smartccraft.creativetab.CreativeTab;
+import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.Textures;
 import it.kytech.smartccraft.tileentity.TileEntitySCC;
 import net.minecraft.block.Block;
@@ -43,7 +44,7 @@ public class BlockSCC extends Block {
 
     @Override
     public String getUnlocalizedName() {
-        return String.format("tile.%s%s", Textures.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
