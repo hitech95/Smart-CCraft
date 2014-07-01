@@ -38,7 +38,7 @@ public class GuiChargeStation extends GuiContainer {
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
-        int energy = (int) (14 * ((float) tileChargeStation.energy / (float) tileChargeStation.getMaxCharge()));
+        int energy = (int) (14 * ((float) tileChargeStation.getEnergy() / (float) tileChargeStation.getEnergyCapacity()));
         if (energy > 0) drawTexturedModalRect(xStart + 80, (yStart + 36) - energy, 176, 12 - energy, 14, energy + 2);
 
         /*if (isPointInRegion(80, 36 - 14, 14, 14, x, y)) {

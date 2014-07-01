@@ -9,3 +9,5 @@ tile.smartccraft:chargeStation.name=Charge Station
 
 # GUI localizations
 container.smartccraft:chargeStation=Charge Station
+container.smartccraft:assemblerBlock=Assembler
+container.smartccraft:assemblerBlock_button=Encode

@@ -1,7 +1,10 @@
 package it.kytech.smartccraft.tileentity;
 
+import it.kytech.smartccraft.network.PacketHandler;
+import it.kytech.smartccraft.network.message.MessageTileEntitySCC;
 import it.kytech.smartccraft.reference.Names;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -98,5 +101,10 @@ public class TileEntitySCC extends TileEntity {
         if (this.hasOwner()) {
             nbtTagCompound.setString(Names.NBT.OWNER, owner);
         }
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntitySCC(this));
     }
 }

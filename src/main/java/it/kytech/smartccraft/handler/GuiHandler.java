@@ -1,9 +1,12 @@
 package it.kytech.smartccraft.handler;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import it.kytech.smartccraft.client.gui.inventory.GuiAssembler;
 import it.kytech.smartccraft.client.gui.inventory.GuiChargeStation;
+import it.kytech.smartccraft.inventory.ContainerAssembler;
 import it.kytech.smartccraft.inventory.ContainerChargeStation;
 import it.kytech.smartccraft.reference.GuiIds;
+import it.kytech.smartccraft.tileentity.TileAssembler;
 import it.kytech.smartccraft.tileentity.TileChargeStation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -17,6 +20,9 @@ public class GuiHandler implements IGuiHandler {
         if (id == GuiIds.CHARGE_STATION) {
             TileChargeStation tileChargeStation = (TileChargeStation) world.getTileEntity(x, y, z);
             return new ContainerChargeStation(player.inventory, tileChargeStation);
+        } else if (id == GuiIds.ASSEMBLER) {
+            TileAssembler tileAssembler = (TileAssembler) world.getTileEntity(x, y, z);
+            return new ContainerAssembler(player.inventory, tileAssembler);
         }
 
         return null;
@@ -27,6 +33,9 @@ public class GuiHandler implements IGuiHandler {
         if (id == GuiIds.CHARGE_STATION) {
             TileChargeStation tileChargeStation = (TileChargeStation) world.getTileEntity(x, y, z);
             return new GuiChargeStation(player.inventory, tileChargeStation);
+        } else if (id == GuiIds.ASSEMBLER) {
+            TileAssembler tileAssembler = (TileAssembler) world.getTileEntity(x, y, z);
+            return new GuiAssembler(player.inventory, tileAssembler);
         }
 
         return null;

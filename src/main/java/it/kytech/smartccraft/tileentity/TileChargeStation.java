@@ -1,24 +1,28 @@
 package it.kytech.smartccraft.tileentity;
 
-import it.kytech.smartccraft.reference.Energy;
 import it.kytech.smartccraft.reference.Names;
+import it.kytech.smartccraft.reference.Settings;
+import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.ForgeDirection;
+import universalelectricity.api.UniversalClass;
+import universalelectricity.api.energy.EnergyStorageHandler;
+import universalelectricity.api.energy.IEnergyContainer;
+import universalelectricity.api.energy.IEnergyInterface;
 
 /**
  * Created by M2K on 29/06/2014.
  */
-public class TileChargeStation extends TileEntitySCC implements IInventory {
+@UniversalClass()
+public class TileChargeStation extends TileEntitySCC implements IInventory, IEnergyInterface, IEnergyContainer {
 
     public final int tier;
-    public double energy = 0;
-    public int limit = 0;
-    public boolean addedToEnergyNet = false;
-    public boolean addedToUE = false;
-    public Object bcProvider;
+    protected EnergyStorageHandler energy;
+
     ItemStack[] inventory;
 
     public TileChargeStation() {
@@ -29,10 +33,11 @@ public class TileChargeStation extends TileEntitySCC implements IInventory {
         inventory = new ItemStack[1];
 
         this.tier = tier;
+        this.energy = new EnergyStorageHandler(getMaxCharge(tier), Settings.ratioChargeStation * (int) Math.pow(2, tier + 1));
     }
 
-    public int getMaxCharge() {
-        return Energy.CHARGE_STATION * (int) Math.pow(10, tier + 1);
+    public static int getMaxCharge(int tier) {
+        return Settings.storageChargeStation * (int) Math.pow(10, tier + 1);
     }
 
     @Override
@@ -134,6 +139,9 @@ public class TileChargeStation extends TileEntitySCC implements IInventory {
                 inventory[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
             }
         }
+
+        //Read Energy
+        energy.readFromNBT(tag);
     }
 
     @Override
@@ -151,6 +159,50 @@ public class TileChargeStation extends TileEntitySCC implements IInventory {
             }
         }
         tag.setTag("Items", tagList);
+
+        //Write Energy
+        energy.writeToNBT(tag);
     }
 
+    @Override
+    public void setEnergy(ForgeDirection forgeDirection, long l) {
+        energy.setEnergy(l);
+    }
+
+    public void setEnergy(long l) {
+        energy.setEnergy(l);
+    }
+
+    @Override
+    public long getEnergy(ForgeDirection forgeDirection) {
+        return energy.getEnergy();
+    }
+
+    public long getEnergy() {
+        return energy.getEnergy();
+    }
+
+    @Override
+    public long getEnergyCapacity(ForgeDirection forgeDirection) {
+        return energy.getEnergyCapacity();
+    }
+
+    public long getEnergyCapacity() {
+        return energy.getEnergyCapacity();
+    }
+
+    @Override
+    public long onReceiveEnergy(ForgeDirection forgeDirection, long l, boolean b) {
+        return energy.receiveEnergy(l, b);
+    }
+
+    @Override
+    public long onExtractEnergy(ForgeDirection forgeDirection, long l, boolean b) {
+        return 0;
+    }
+
+    @Override
+    public boolean canConnect(ForgeDirection forgeDirection, Object o) {
+        return true;
+    }
 }

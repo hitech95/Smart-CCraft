@@ -10,6 +10,7 @@ import it.kytech.smartccraft.configuration.ConfigurationHandler;
 import it.kytech.smartccraft.handler.GuiHandler;
 import it.kytech.smartccraft.init.BlocksLoader;
 import it.kytech.smartccraft.init.ItemsLoader;
+import it.kytech.smartccraft.network.PacketHandler;
 import it.kytech.smartccraft.proxy.IProxy;
 import it.kytech.smartccraft.reference.Reference;
 
@@ -24,9 +25,17 @@ public class SmartCCraft {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
+        //Load configuration
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
+        //Load Packet Manager (Synk TEs)
+        PacketHandler.init();
+
+        //Load Intems
         ItemsLoader.init();
+
+        //Load Blocks
         BlocksLoader.init();
     }
 

@@ -21,9 +21,9 @@ public class ContainerAssembler extends ContainerSCC {
         this.tileAssembler = tileAssembler;
 
         addSlotToContainer(new Slot(tileAssembler, 0, 12, 8));
-        addSlotToContainer(new Slot(tileAssembler, 1, 12, 62));
-        addSlotToContainer(new Slot(tileAssembler, 2, 55, 35));
-        addSlotToContainer(new Slot(tileAssembler, 3, 108, 35));
+        addSlotToContainer(new Slot(tileAssembler, 1, 12, 55));
+        addSlotToContainer(new Slot(tileAssembler, 2, 46, 32));
+        addSlotToContainer(new Slot(tileAssembler, 3, 108, 38));
         addSlotToContainer(new Slot(tileAssembler, 4, 147, 8));
     }
 

@@ -39,11 +39,8 @@ public class GuiAssembler extends GuiContainer {
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
-        int energy = (int) (14 * ((float) tileAssembler.energy / (float) tileAssembler.getMaxCharge()));
-        if (energy > 0) drawTexturedModalRect(xStart + 80, (yStart + 36) - energy, 176, 12 - energy, 14, energy + 2);
+        int energy = (int) (36 * ((float) tileAssembler.energy / (float) tileAssembler.getMaxCharge()));
+        if (energy > 0) drawTexturedModalRect(xStart + 102, yStart + 12, 176, 0, 37 - energy, 14);
 
-        /*if (isPointInRegion(80, 36 - 14, 14, 14, x, y)) {
-            drawCreativeTabHoveringText("Stored: "+(int)tileChargeStation.energy+" / "+tileChargeStation.getMaxCharge(), x, y);
-        }*/
     }
 }

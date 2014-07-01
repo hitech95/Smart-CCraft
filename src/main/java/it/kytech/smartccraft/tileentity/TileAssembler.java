@@ -1,7 +1,7 @@
 package it.kytech.smartccraft.tileentity;
 
-import it.kytech.smartccraft.reference.Energy;
 import it.kytech.smartccraft.reference.Names;
+import it.kytech.smartccraft.reference.Settings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -20,7 +20,7 @@ public class TileAssembler extends TileEntitySCC implements IInventory {
     }
 
     public int getMaxCharge() {
-        return Energy.ASSEMBLER;
+        return Settings.storageAssembler;
     }
 
     @Override

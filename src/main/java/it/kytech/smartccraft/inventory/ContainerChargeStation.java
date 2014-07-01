@@ -25,7 +25,7 @@ public class ContainerChargeStation extends ContainerSCC {
     @Override
     public void addCraftingToCrafters(ICrafting var1) {
         super.addCraftingToCrafters(var1);
-        var1.sendProgressBarUpdate(this, 0, (int) tileChargeStation.energy);
+        var1.sendProgressBarUpdate(this, 0, (int) tileChargeStation.getEnergy());
     }
 
     @Override
@@ -33,18 +33,18 @@ public class ContainerChargeStation extends ContainerSCC {
         super.detectAndSendChanges();
 
         for (ICrafting crafter : (List<ICrafting>) crafters) {
-            if (lastEnergy != tileChargeStation.energy)
-                crafter.sendProgressBarUpdate(this, 0, (int) tileChargeStation.energy);
+            if (lastEnergy != tileChargeStation.getEnergy())
+                crafter.sendProgressBarUpdate(this, 0, (int) tileChargeStation.getEnergy());
         }
 
-        lastEnergy = (int) tileChargeStation.energy;
+        lastEnergy = (int) tileChargeStation.getEnergy();
     }
 
     @Override
     public void updateProgressBar(int index, int value) {
         switch (index) {
             case 0:
-                tileChargeStation.energy = value;
+                tileChargeStation.setEnergy(value);
                 break;
         }
     }
