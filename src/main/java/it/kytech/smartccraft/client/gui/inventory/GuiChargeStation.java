@@ -42,7 +42,7 @@ public class GuiChargeStation extends GuiContainer {
         if (energy > 0) drawTexturedModalRect(xStart + 80, (yStart + 36) - energy, 176, 12 - energy, 14, energy + 2);
 
         /*if (isPointInRegion(80, 36 - 14, 14, 14, x, y)) {
-            drawCreativeTabHoveringText("Stored: "+(int)tileChargeStation.energy+" / "+tileChargeStation.getMaxCharge(), x, y);
+            drawCreativeTabHoveringText("Stored: "+(int)tileChargeStation.energyStorage+" / "+tileChargeStation.getMaxCharge(), x, y);
         }*/
     }
 }

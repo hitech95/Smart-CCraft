@@ -9,7 +9,6 @@ import it.kytech.smartccraft.tileentity.TileChargeStation;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK2;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK3;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK4;
-import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

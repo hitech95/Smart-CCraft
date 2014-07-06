@@ -2,7 +2,6 @@ package it.kytech.smartccraft.tileentity;
 
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.reference.Settings;
-import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -21,7 +20,7 @@ import universalelectricity.api.energy.IEnergyInterface;
 public class TileChargeStation extends TileEntitySCC implements IInventory, IEnergyInterface, IEnergyContainer {
 
     public final int tier;
-    protected EnergyStorageHandler energy;
+    protected EnergyStorageHandler energyStorage;
 
     ItemStack[] inventory;
 
@@ -33,7 +32,7 @@ public class TileChargeStation extends TileEntitySCC implements IInventory, IEne
         inventory = new ItemStack[1];
 
         this.tier = tier;
-        this.energy = new EnergyStorageHandler(getMaxCharge(tier), Settings.ratioChargeStation * (int) Math.pow(2, tier + 1));
+        this.energyStorage = new EnergyStorageHandler(getMaxCharge(tier), Settings.ratioChargeStation * (int) Math.pow(2, tier + 1));
     }
 
     public static int getMaxCharge(int tier) {
@@ -141,7 +140,7 @@ public class TileChargeStation extends TileEntitySCC implements IInventory, IEne
         }
 
         //Read Energy
-        energy.readFromNBT(tag);
+        energyStorage.readFromNBT(tag);
     }
 
     @Override
@@ -161,39 +160,39 @@ public class TileChargeStation extends TileEntitySCC implements IInventory, IEne
         tag.setTag("Items", tagList);
 
         //Write Energy
-        energy.writeToNBT(tag);
+        energyStorage.writeToNBT(tag);
     }
 
     @Override
     public void setEnergy(ForgeDirection forgeDirection, long l) {
-        energy.setEnergy(l);
+        energyStorage.setEnergy(l);
     }
 
     public void setEnergy(long l) {
-        energy.setEnergy(l);
+        energyStorage.setEnergy(l);
     }
 
     @Override
     public long getEnergy(ForgeDirection forgeDirection) {
-        return energy.getEnergy();
+        return energyStorage.getEnergy();
     }
 
     public long getEnergy() {
-        return energy.getEnergy();
+        return energyStorage.getEnergy();
     }
 
     @Override
     public long getEnergyCapacity(ForgeDirection forgeDirection) {
-        return energy.getEnergyCapacity();
+        return energyStorage.getEnergyCapacity();
     }
 
     public long getEnergyCapacity() {
-        return energy.getEnergyCapacity();
+        return energyStorage.getEnergyCapacity();
     }
 
     @Override
     public long onReceiveEnergy(ForgeDirection forgeDirection, long l, boolean b) {
-        return energy.receiveEnergy(l, b);
+        return energyStorage.receiveEnergy(l, b);
     }
 
     @Override

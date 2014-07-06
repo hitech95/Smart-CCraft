@@ -10,4 +10,5 @@ public class Reference {
     public static final String MOD_VERSION = "1.7.2-1.0";
     public static final String SERVER_PROXY = "it.kytech.smartccraft.proxy.ServerProxy";
     public static final String CLIENT_PROXY = "it.kytech.smartccraft.proxy.ClientProxy";
+    public static final String GUI_FACTORY = "it.kytech.smartccraft.client.gui.configuration.ModGuiFactory";
 }

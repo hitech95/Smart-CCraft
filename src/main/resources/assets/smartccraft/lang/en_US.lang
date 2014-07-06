@@ -8,6 +8,16 @@ tile.smartccraft:assemblerBlock.name=Assembly Station
 tile.smartccraft:chargeStation.name=Charge Station
 
 # GUI localizations
+# Inventory
 container.smartccraft:chargeStation=Charge Station
 container.smartccraft:assemblerBlock=Assembler
 container.smartccraft:assemblerBlock_button=Encode
+
+#Configuration
+configuration.smartccraft.title=Smart CCraft Config
+configuration.smartccraft.category.general=General Config
+configuration.smartccraft.category.general.tooltip=General Mod Configs
+configuration.smartccraft.category.integration=Integration Config
+configuration.smartccraft.category.integration.tooltip=Enable or disable integration between mods
+configuration.smartccraft.category.energy=Energy Config
+configuration.smartccraft.category.energy.tooltip=Edit the energy values
