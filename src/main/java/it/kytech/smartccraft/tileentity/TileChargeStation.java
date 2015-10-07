@@ -1,19 +1,19 @@
 /**
  * This file is part of SmartCCraft
- *
+ * <p/>
  * Copyright (c) 2015 hitech95 <https://github.com/hitech95>
  * Copyright (c) contributors
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,6 +32,7 @@ import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.Settings;
 import it.kytech.smartccraft.util.CCHelper;
 import it.kytech.smartccraft.util.IWailaDataDisplay;
+import it.kytech.smartccraft.util.LogHelper;
 import mcp.mobius.waila.api.SpecialChars;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -74,6 +75,7 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
 
         this.tier = tier;
         this.state = (byte) this.tier;
+        status = STATES.IDLE;
         this.energyStorage = new EnergyStorage(getMaxCharge(tier), Settings.ratioChargeStation * (int) Math.pow(2, tier + 1));
     }
 
@@ -83,7 +85,7 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
 
     public void setRedstoneState(boolean state) {
         if (state) {
-            status = STATES.REDSTONE_DISABLED;
+            setStatus(STATES.REDSTONE_DISABLED);
         }
     }
 
@@ -95,12 +97,18 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
         return status == STATES.RUNNING;
     }
 
-    public STATES getStatus(){
+    public STATES getStatus() {
         return status;
     }
 
-    public void setStatus(STATES newStatus){
-        status = newStatus;
+    public void setStatus(STATES newStatus) {
+        if (status != newStatus) {
+            status = newStatus;
+
+            this.markDirty();
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, status.ordinal());
+            this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
+        }
     }
 
     @Override
@@ -164,7 +172,6 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
             itemStack.stackSize = this.getInventoryStackLimit();
         }
 
-
         this.markDirty();
     }
 
@@ -205,8 +212,23 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
     }
 
     @Override
-    public void updateEntity() { //TODO: discharge the internal IEnergyContainerItem before charging the turtle
+    public void updateEntity() {
         if (!getWorldObj().isRemote) {
+
+            ItemStack battery = getStackInSlot(0);
+            if (battery != null && battery.getItem() instanceof IEnergyContainerItem) {
+                IEnergyContainerItem energyContainerItem = (IEnergyContainerItem) battery.getItem();
+                if (energyContainerItem.getEnergyStored(battery) > 0) {
+                    int charge = Math.min(energyStorage.getMaxEnergyStored() - energyStorage.getEnergyStored(),
+                            energyContainerItem.getEnergyStored(battery));
+                    energyContainerItem.extractEnergy(battery, energyStorage.receiveEnergy(charge, false), false);
+                }
+            }
+
+            if (status == STATES.REDSTONE_DISABLED) {
+                return;
+            }
+
             int x = this.xCoord + getOrientation().offsetX;
             int y = this.yCoord + getOrientation().offsetY;
             int z = this.zCoord + getOrientation().offsetZ;
@@ -215,7 +237,7 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
             ITurtleAccess turtle;
 
             if (te == null) {
-                status = STATES.IDLE;
+                setStatus(STATES.IDLE);
                 return;
             }
 
@@ -227,14 +249,20 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
             }
 
             if (turtle == null) {
-                status = STATES.IDLE;
+                setStatus(STATES.IDLE);
                 return;
             }
 
             int rate = (int) Math.pow((double) tier + 1, (double) 4);
             if (energyStorage.getEnergyStored() >= rate) {
-                status = STATES.RUNNING;
-                energyStorage.extractEnergy(addFuel(turtle, rate) * Settings.conversionRatioChargeStation, false);
+                int fuelAdded = addFuel(turtle, rate);
+                energyStorage.extractEnergy(fuelAdded * Settings.conversionRatioChargeStation, false);
+
+                if (fuelAdded == 0) {
+                    setStatus(STATES.IDLE);
+                } else {
+                    setStatus(STATES.RUNNING);
+                }
             }
         }
     }
@@ -272,7 +300,18 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
 
     @Override
     public Packet getDescriptionPacket() {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityChargeStation(this));
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntitySCC(this));
+    }
+
+    @Override
+    public boolean receiveClientEvent(int eventId, int eventData) {
+
+        if (eventId == 1) {
+            this.status = STATES.values()[eventData];
+            return true;
+        } else {
+            return super.receiveClientEvent(eventId, eventData);
+        }
     }
 
     public double getEnergy() {
@@ -289,17 +328,17 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
 
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        return (from != getOrientation()) ? energyStorage.receiveEnergy(maxReceive, simulate) : 0; //TODO: check if direction (ForgeDirection) is the same of orientation
+        return (from != getOrientation()) ? energyStorage.receiveEnergy(maxReceive, simulate) : 0;
     }
 
     @Override
     public int getEnergyStored(ForgeDirection from) {
-        return (from != getOrientation()) ? energyStorage.getEnergyStored() : 0; //TODO: check if direction (ForgeDirection) is the same of orientation
+        return (from != getOrientation()) ? energyStorage.getEnergyStored() : 0;
     }
 
     @Override
     public int getMaxEnergyStored(ForgeDirection from) {
-        return (from != getOrientation()) ? energyStorage.getMaxEnergyStored() : 0; //TODO: check if direction (ForgeDirection) is the same of orientation
+        return (from != getOrientation()) ? energyStorage.getMaxEnergyStored() : 0;
     }
 
     @Override
@@ -328,7 +367,7 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
                 break;
         }
 
-        currenttip.set(0, StatCollector.translateToLocal("tile" + "." + Reference.MOD_ID.toLowerCase() + ":" + Names.Blocks.CHARGE_STATION + ".name")
+        currenttip.add(StatCollector.translateToLocal("tile" + "." + Reference.MOD_ID.toLowerCase() + ":" + Names.Blocks.CHARGE_STATION + ".name")
                 + " - " + tooltip);
         return currenttip;
     }
