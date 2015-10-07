@@ -1,3 +1,22 @@
+/**
+ * This file is part of SmartCCraft
+ *
+ * Copyright (c) 2015 hitech95 <https://github.com/hitech95>
+ * Copyright (c) contributors
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package it.kytech.smartccraft.handler;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
@@ -39,10 +58,9 @@ public class ConfigurationHandler {
             configuration.setCategoryRequiresMcRestart(Settings.INTEGRATION_CATEGORY, true);
             configuration.setCategoryRequiresWorldRestart(Settings.INTEGRATION_CATEGORY, true);
 
-            Settings.integrateIC2 = configuration.get(Settings.INTEGRATION_CATEGORY, Settings.INTEGRATION_IC2, Integration.DEFAULT_INTEGRATION_IC2, "Integrate Industrialcraft Machine Block").getBoolean();
             Settings.integrateBC = configuration.get(Settings.INTEGRATION_CATEGORY, Settings.INTEGRATION_BC, Integration.DEFAULT_INTEGRATION_BC, "Integrate Buildcraft Iron Gear").getBoolean();
             Settings.integrateTE = configuration.get(Settings.INTEGRATION_CATEGORY, Settings.INTEGRATION_TE, Integration.DEFAULT_INTEGRATION_TE, "Integrate Thermal Expansion Machine Frame").getBoolean();
-            Settings.integrateMFR = configuration.get(Settings.INTEGRATION_CATEGORY, Settings.INTEGRATION_MFR, Integration.DEFAULT_INTEGRATION_MFR, "Add a Advanced Factory Machine Block, craft with iron instead of stone").getBoolean();
+            //Settings.integrateMFR = configuration.get(Settings.INTEGRATION_CATEGORY, Settings.INTEGRATION_MFR, Integration.DEFAULT_INTEGRATION_MFR, "Add a Advanced Factory Machine Block, craft with iron instead of stone").getBoolean();
 
             //Energy
             configuration.setCategoryComment(Settings.ENERGY_CATEGORY, "Energy Options, Require World restart");
@@ -55,6 +73,7 @@ public class ConfigurationHandler {
             //Charge Station
             Settings.storageChargeStation = configuration.get(Settings.ENERGY_CATEGORY, Settings.ENERGY_PATH_STORAGE_CHARGE_STATION, Energy.DEFAULT_STORAGE_CHARGE_STATION, "Energy Stored on Charge Station MK1").getInt();
             Settings.ratioChargeStation = configuration.get(Settings.ENERGY_CATEGORY, Settings.ENERGY_PATH_RATIO_CHARGE_STATION, Energy.DEFAULT_RATIO_CHARGE_STATION, "Energy ratio on Charge Station MK1").getInt();
+            Settings.conversionRatioChargeStation = configuration.get(Settings.ENERGY_CATEGORY, Settings.ENERGY_PATH_CONVERSION_RATIO_CHARGE_STATION, Energy.DEFAULT_CONVERSION_RATIO_CHARGE_STATION, "Amount of RF per turtle fuel value").getInt();
 
         } catch (Exception e) {
             LogHelper.error("Config File not found...");

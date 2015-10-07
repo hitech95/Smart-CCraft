@@ -4,8 +4,17 @@ key.categories.scc=Smart CCraft
 # Item localizations
 
 # Block localizations
-tile.smartccraft:assemblerBlock.name=Assembly Station
+tile.smartccraft:frameBlock.name=Frame Block [WIP]
+tile.smartccraft:assemblerBlock.name=Assembly Station [WIP]
 tile.smartccraft:chargeStation.name=Charge Station
+
+# Tooltip localizations
+tooltip.smartccraft:frameBlock=Used to craft Machines
+tooltip.smartccraft:assemblerBlock=3x3 or 2x2 crafter
+tooltip.smartccraft:chargeStation=MK1
+tooltip.smartccraft:chargeStationMK2=MK2
+tooltip.smartccraft:chargeStationMK3=MK3
+tooltip.smartccraft:chargeStationMK4=MK4
 
 # GUI localizations
 # Inventory

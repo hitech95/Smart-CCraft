@@ -1,3 +1,22 @@
+/**
+ * This file is part of SmartCCraft
+ *
+ * Copyright (c) 2015 hitech95 <https://github.com/hitech95>
+ * Copyright (c) contributors
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package it.kytech.smartccraft.block;
 
 import cpw.mods.fml.relauncher.Side;
@@ -9,10 +28,12 @@ import it.kytech.smartccraft.tileentity.TileChargeStation;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK2;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK3;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK4;
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,15 +44,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
+import java.util.Random;
 
-public class BlockChargeStation extends BlockSCC implements ITileEntityProvider {
+public class BlockChargeStation extends BlockTileSCC implements ITileEntityProvider {
+
+    public static final int MAX_TIER = 3;
 
     @SideOnly(Side.CLIENT)
     private IIcon[] blockIconFront;
     @SideOnly(Side.CLIENT)
     private IIcon[] blockIconSide;
-
-    public static final int MAX_TIER = 4;
 
     public BlockChargeStation() {
         super(Material.rock);
@@ -41,17 +63,23 @@ public class BlockChargeStation extends BlockSCC implements ITileEntityProvider 
 
     @Override
     public TileEntity createNewTileEntity(World world, int metaData) {
-        if (metaData == 0) {
-            return new TileChargeStation();
-        } else if (metaData == 1) {
-            return new TileChargeStationMK2();
-        } else if (metaData == 2) {
-            return new TileChargeStationMK3();
-        } else if (metaData == 3) {
-            return new TileChargeStationMK4();
+
+        if (metaData > MAX_TIER) {
+            return null;
         }
 
-        return null;
+        switch (metaData) {
+            case 0:
+                return new TileChargeStation();
+            case 1:
+                return new TileChargeStationMK2();
+            case 2:
+                return new TileChargeStationMK3();
+            case 3:
+                return new TileChargeStationMK4();
+            default:
+                return null;
+        }
     }
 
     @Override
@@ -63,8 +91,8 @@ public class BlockChargeStation extends BlockSCC implements ITileEntityProvider 
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
 
-        blockIconFront = new IIcon[MAX_TIER];
-        blockIconSide = new IIcon[MAX_TIER];
+        blockIconFront = new IIcon[MAX_TIER + 1];
+        blockIconSide = new IIcon[MAX_TIER + 1];
 
         for (int meta = 0; meta < 4; meta++) {
             blockIconSide[meta] = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())) + "_" + meta);
@@ -91,10 +119,25 @@ public class BlockChargeStation extends BlockSCC implements ITileEntityProvider 
             TileChargeStation tileChargeStation = (TileChargeStation) tileEntity;
             ForgeDirection direction = tileChargeStation.getOrientation();
 
-            return getIcon(SIDE_OFFSETS[direction.ordinal()][side], tileChargeStation.tier);
+            return getIcon(SIDE_OFFSETS[direction.ordinal()][side], tileChargeStation.getTier());
         }
 
         return null;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+
+        if ((tileEntity instanceof TileChargeStation) && !((TileChargeStation) tileEntity).isWorking()) {
+            return;
+        }
+
+        double d0 = (double) ((float) x + 0.4F + random.nextFloat() * 0.2F);
+        double d1 = (double) ((float) y + 0.7F + random.nextFloat() * 0.3F);
+        double d2 = (double) ((float) z + 0.4F + random.nextFloat() * 0.2F);
+        world.spawnParticle("reddust", d0, d1, d2, 0.0D, 0.0D, 0.0D);
     }
 
     @Override
@@ -112,6 +155,45 @@ public class BlockChargeStation extends BlockSCC implements ITileEntityProvider 
     public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
         for (int meta = 0; meta < 4; meta++) {
             list.add(new ItemStack(item, 1, meta));
+        }
+    }
+
+    /**
+     * Called when the block is placed in the world.
+     */
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
+        super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
+        if (!world.isRemote) {
+            updateTileEntityState(world, x, y, z);
+        }
+    }
+
+    /**
+     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
+     * their own) Args: x, y, z, neighbor Block
+     */
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+        super.onNeighborBlockChange(world, x, y, z, block);
+        if (!world.isRemote) {
+            updateTileEntityState(world, x, y, z);
+        }
+    }
+
+    /**
+     * Called whenever the block is added into the world. Args: world, x, y, z
+     */
+    public void onBlockAdded(World world, int x, int y, int z) {
+        super.onBlockAdded(world, x, y, z);
+        if (!world.isRemote) {
+            updateTileEntityState(world, x, y, z);
+        }
+    }
+
+    public void updateTileEntityState(World world, int x, int y, int z) {
+        boolean state = world.isBlockIndirectlyGettingPowered(x, y, z);
+        if (world.getTileEntity(x, y, z) instanceof TileChargeStation) {
+            ((TileChargeStation) world.getTileEntity(x, y, z)).setRedstoneState(state);
         }
     }
 }
