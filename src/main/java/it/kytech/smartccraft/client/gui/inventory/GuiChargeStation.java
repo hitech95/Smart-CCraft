@@ -1,19 +1,19 @@
 /**
  * This file is part of SmartCCraft
- *
+ * <p/>
  * Copyright (c) 2015 hitech95 <https://github.com/hitech95>
  * Copyright (c) contributors
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,9 +22,11 @@ package it.kytech.smartccraft.client.gui.inventory;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import it.kytech.smartccraft.inventory.ContainerChargeStation;
+import it.kytech.smartccraft.reference.Messages;
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.reference.Textures;
 import it.kytech.smartccraft.tileentity.TileChargeStation;
+import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
@@ -38,7 +40,7 @@ public class GuiChargeStation extends GuiContainer {
         super(new ContainerChargeStation(inventoryPlayer, tileChargeStation));
         this.tileChargeStation = tileChargeStation;
         xSize = 176;
-        //ySize = 190; //TODO: why not set?
+        ySize = 166; //TODO: why not set?
     }
 
     @Override
@@ -52,16 +54,25 @@ public class GuiChargeStation extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
         this.mc.getTextureManager().bindTexture(Textures.GUI_CHARGE_STATION);
+
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
-        int energy = (int) (14 * ((float) tileChargeStation.getEnergy() / (float) tileChargeStation.getEnergyCapacity()));
+        double storedEnergy = tileChargeStation.getEnergy();
+        double maxEnergy = tileChargeStation.getEnergyCapacity();
+
+        int energy = (int) (14 * (storedEnergy / maxEnergy));
+
+        LogHelper.error("--------> RESIZED ENERGY:" + energy);
         if (energy > 0) drawTexturedModalRect(xStart + 80, (yStart + 36) - energy, 176, 12 - energy, 14, energy + 2);
 
-        /*if (isPointInRegion(80, 36 - 14, 14, 14, x, y)) {
-            drawCreativeTabHoveringText("Stored: "+(int)tileChargeStation.energyStorage+" / "+tileChargeStation.getMaxCharge(), x, y);
-        }*/
+        if (func_146978_c(80, 36 - 14, 14, 14, x, y)) { //isPointInTRegion Old Mapping
+            drawCreativeTabHoveringText(
+                    String.format(StatCollector.translateToLocal(Messages.Tooltips.ENERGY), storedEnergy, maxEnergy),
+                    x, y);
+        }
     }
 }

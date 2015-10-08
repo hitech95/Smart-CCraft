@@ -9,6 +9,13 @@ tile.smartccraft:assemblerBlock.name=Assembly Station [WIP]
 tile.smartccraft:chargeStation.name=Charge Station
 
 # Tooltip localizations
+#General
+tooltip.smartccraft:energy=Energy: %1$s/%2$s
+tooltip.smartccraft:state=State: %1$s
+tooltip.smartccraft:working=Working
+tooltip.smartccraft:notWorking= Not Working
+
+#Machines
 tooltip.smartccraft:frameBlock=Used to craft Machines
 tooltip.smartccraft:assemblerBlock=3x3 or 2x2 crafter
 tooltip.smartccraft:chargeStation=MK1

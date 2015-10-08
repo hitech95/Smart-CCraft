@@ -31,11 +31,11 @@ public class BlocksLoader {
 
     public static final BlockDummySCC frameBlock = new BlockFrame();
     public static final BlockTileSCC assemblerBlock = new BlockAssembler();
-    public static final BlockTileSCC stationBlock = new BlockChargeStation();
+    public static final BlockTileSCC chargeStation = new BlockChargeStation();
 
     public static void init() {
         GameRegistry.registerBlock(frameBlock, ItemBlockFrame.class, Names.Blocks.FRAME);
         GameRegistry.registerBlock(assemblerBlock, Names.Blocks.ASSEMBLER);
-        GameRegistry.registerBlock(stationBlock, ItemBlockChargeStation.class, Names.Blocks.CHARGE_STATION);
+        GameRegistry.registerBlock(chargeStation, ItemBlockChargeStation.class, Names.Blocks.CHARGE_STATION);
     }
 }

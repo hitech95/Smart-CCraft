@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * Created by nicolo on 07/10/15.
  */
-public class MessageTileEntityChargeStation implements IMessage, IMessageHandler<MessageTileEntityChargeStation, IMessage> {
+public class MessageTileChargeStation implements IMessage, IMessageHandler<MessageTileChargeStation, IMessage> {
 
     public int x, y, z;
     public byte orientation, state;
@@ -23,10 +23,10 @@ public class MessageTileEntityChargeStation implements IMessage, IMessageHandler
 
     public byte status;
 
-    public MessageTileEntityChargeStation() {
+    public MessageTileChargeStation() {
     }
 
-    public MessageTileEntityChargeStation(TileChargeStation tileEntitySCC) {
+    public MessageTileChargeStation(TileChargeStation tileEntitySCC) {
         this.x = tileEntitySCC.xCoord;
         this.y = tileEntitySCC.yCoord;
         this.z = tileEntitySCC.zCoord;
@@ -81,7 +81,7 @@ public class MessageTileEntityChargeStation implements IMessage, IMessageHandler
     }
 
     @Override
-    public IMessage onMessage(MessageTileEntityChargeStation message, MessageContext ctx) {
+    public IMessage onMessage(MessageTileChargeStation message, MessageContext ctx) {
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
 
         if (tileEntity instanceof TileChargeStation) {

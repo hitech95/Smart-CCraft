@@ -24,15 +24,13 @@ import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyReceiver;
 import dan200.computercraft.api.turtle.ITurtleAccess;
 import it.kytech.smartccraft.network.PacketHandler;
-import it.kytech.smartccraft.network.message.MessageTileEntityChargeStation;
-import it.kytech.smartccraft.network.message.MessageTileEntitySCC;
+import it.kytech.smartccraft.network.message.MessageTileChargeStation;
 import it.kytech.smartccraft.reference.Messages;
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.Settings;
 import it.kytech.smartccraft.util.CCHelper;
 import it.kytech.smartccraft.util.IWailaDataDisplay;
-import it.kytech.smartccraft.util.LogHelper;
 import mcp.mobius.waila.api.SpecialChars;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -300,7 +298,7 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
 
     @Override
     public Packet getDescriptionPacket() {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntitySCC(this));
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileChargeStation(this));
     }
 
     @Override
@@ -351,24 +349,31 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
         String tooltip;
         switch (tier) {
             case 0:
-                tooltip = SpecialChars.GRAY + " " + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION);
+                tooltip = SpecialChars.GRAY + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION);
                 break;
             case 1:
-                tooltip = SpecialChars.DRED + " " + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION_2);
+                tooltip = SpecialChars.DRED + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION_2);
                 break;
             case 2:
-                tooltip = SpecialChars.DBLUE + " " + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION_3);
+                tooltip = SpecialChars.DBLUE + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION_3);
                 break;
             case 3:
-                tooltip = SpecialChars.DGREEN + " " + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION_4);
+                tooltip = SpecialChars.DGREEN + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION_4);
                 break;
             default:
-                tooltip = SpecialChars.WHITE + " " + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION);
+                tooltip = SpecialChars.WHITE + StatCollector.translateToLocal(Messages.Tooltips.CHARGE_STATION);
                 break;
         }
 
-        currenttip.add(StatCollector.translateToLocal("tile" + "." + Reference.MOD_ID.toLowerCase() + ":" + Names.Blocks.CHARGE_STATION + ".name")
-                + " - " + tooltip);
+        String workingStatus = SpecialChars.DRED + StatCollector.translateToLocal(Messages.Tooltips.NOT_WORKING);
+        if (isWorking()) {
+            workingStatus = SpecialChars.DGREEN + StatCollector.translateToLocal(Messages.Tooltips.WORKING);
+        }
+
+        currenttip.set(0,
+                StatCollector.translateToLocal("tile" + "." + Reference.MOD_ID.toLowerCase() + ":" + Names.Blocks.CHARGE_STATION + ".name")
+                        + " - " + tooltip);
+        currenttip.add(String.format(StatCollector.translateToLocal(Messages.Tooltips.STATUS), workingStatus));
         return currenttip;
     }
 

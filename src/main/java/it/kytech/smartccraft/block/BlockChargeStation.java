@@ -138,7 +138,6 @@ public class BlockChargeStation extends BlockTileSCC implements ITileEntityProvi
         }
 
         TileChargeStation tileChargeStation = (TileChargeStation) tileEntity;
-        LogHelper.error("------>" + tileChargeStation.isWorking() + " isClient:" + FMLCommonHandler.instance().getEffectiveSide().isClient());
 
         if(!((TileChargeStation) tileEntity).isWorking()){
             return;

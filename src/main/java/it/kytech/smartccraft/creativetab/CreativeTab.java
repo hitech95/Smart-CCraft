@@ -32,7 +32,7 @@ public class CreativeTab {
 
         @Override
         public Item getTabIconItem() {
-            return Item.getItemFromBlock(BlocksLoader.stationBlock);
+            return Item.getItemFromBlock(BlocksLoader.assemblerBlock);
         }
 
         @Override

@@ -26,9 +26,13 @@ public class Messages {
     public static class Tooltips{
         private static final String TOOLTIP_PREFIX = "tooltip." + Reference.MOD_ID.toLowerCase() + ":";
 
-        public static final String FRAME = "frameBlock";
+        public static final String ENERGY = TOOLTIP_PREFIX + "energy";
+        public static final String STATUS = TOOLTIP_PREFIX + "state";
+        public static final String WORKING = TOOLTIP_PREFIX + "working";
+        public static final String NOT_WORKING = TOOLTIP_PREFIX + "notWorking";
 
-        public static final String ASSEMBLER = "assemblerBlock";
+        public static final String FRAME = TOOLTIP_PREFIX + "frameBlock";
+        public static final String ASSEMBLER = TOOLTIP_PREFIX + "assemblerBlock";
 
         public static final String CHARGE_STATION = TOOLTIP_PREFIX + "chargeStation";
         public static final String CHARGE_STATION_2 = TOOLTIP_PREFIX + "chargeStationMK2";
