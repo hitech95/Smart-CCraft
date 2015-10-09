@@ -103,8 +103,6 @@ public class MessageTileChargeStation implements IMessage, IMessageHandler<Messa
             ((TileChargeStation) tileEntity).setCustomName(message.customName);
             ((TileChargeStation) tileEntity).setOwnerUUID(message.ownerUUID);
             ((TileChargeStation) tileEntity).setStatus(TileChargeStation.STATES.values()[message.status]);
-
-            LogHelper.info("----> Message working: " + ((TileChargeStation) tileEntity).isWorking()); //TODO: remove debug
         }
 
         return null;
@@ -112,6 +110,6 @@ public class MessageTileChargeStation implements IMessage, IMessageHandler<Messa
 
     @Override
     public String toString() {
-        return String.format("MessageTileEntitySCC - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, ownerUUID:%s", x, y, z, orientation, state, customName, ownerUUID);
+        return String.format("MessageTileChargeStation - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, ownerUUID:%s", x, y, z, orientation, state, customName, ownerUUID);
     }
 }

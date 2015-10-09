@@ -25,7 +25,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import it.kytech.smartccraft.tileentity.TileEnergyHandler;
-import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -40,13 +39,12 @@ public class MessageTileEnergy implements IMessage, IMessageHandler<MessageTileE
     public int energy;
 
     public MessageTileEnergy() {
-
     }
 
     public MessageTileEnergy(TileEnergyHandler tileEnergyHandler) {
         this.x = tileEnergyHandler.xCoord;
-        this.x = tileEnergyHandler.yCoord;
-        this.x = tileEnergyHandler.zCoord;
+        this.y = tileEnergyHandler.yCoord;
+        this.z = tileEnergyHandler.zCoord;
 
         this.energy = tileEnergyHandler.getEnergyStored();
     }
@@ -54,8 +52,8 @@ public class MessageTileEnergy implements IMessage, IMessageHandler<MessageTileE
     @Override
     public void fromBytes(ByteBuf buf) {
         this.x = buf.readInt();
-        this.x = buf.readInt();
-        this.x = buf.readInt();
+        this.y = buf.readInt();
+        this.z = buf.readInt();
 
         this.energy = buf.readInt();
     }
@@ -73,14 +71,15 @@ public class MessageTileEnergy implements IMessage, IMessageHandler<MessageTileE
     public IMessage onMessage(MessageTileEnergy message, MessageContext ctx) {
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
 
-        LogHelper.info("Message Energy"); //TODO: remove debug
-
         if (tileEntity instanceof TileEnergyHandler) {
             ((TileEnergyHandler) tileEntity).setEnergyStored(message.energy);
-
-            LogHelper.info("Message Energy Received: " + ((TileEnergyHandler) tileEntity).getEnergyStored()); //TODO: remove debug
         }
 
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("MessageTileEnergy - x:%s, y:%s, z:%s, energy:%s", x, y, z, energy);
     }
 }

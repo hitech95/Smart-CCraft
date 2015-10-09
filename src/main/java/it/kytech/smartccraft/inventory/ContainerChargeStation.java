@@ -50,7 +50,6 @@ public class ContainerChargeStation extends ContainerSCC {
 
         if(iCrafting instanceof EntityPlayerMP){
             PacketHandler.INSTANCE.sendTo(new MessageTileEnergy(tileChargeStation), (EntityPlayerMP) iCrafting);
-            LogHelper.error("FIRST PACKET:" + tileChargeStation.getEnergyStored()); //TODO: remove debug
         }else{
             short low = (short) (tileChargeStation.getEnergyStored() & 0xFFFF);
             short hi = (short) ((tileChargeStation.getEnergyStored() >> 16) & 0xFFFF);
@@ -68,7 +67,6 @@ public class ContainerChargeStation extends ContainerSCC {
 
                 if(crafter instanceof EntityPlayerMP){
                     PacketHandler.INSTANCE.sendTo(new MessageTileEnergy(tileChargeStation), (EntityPlayerMP) crafter);
-                    LogHelper.error("BEFORE PACKET:" + tileChargeStation.getEnergyStored()); //TODO: remove debug
                 }else{
                     short low = (short) (tileChargeStation.getEnergyStored() & 0xFFFF);
                     short hi = (short) ((tileChargeStation.getEnergyStored() >> 16) & 0xFFFF);
@@ -85,8 +83,10 @@ public class ContainerChargeStation extends ContainerSCC {
     public void updateProgressBar(int index, int value) {
         switch (index) {
             case 0:
-                //tileChargeStation.setEnergyStored(value); //is short not int
-                //LogHelper.error("AFTER PACKET:" + value);
+                tileChargeStation.setEnergyStored((tileChargeStation.getEnergyStored() | 0xFFFF) & value);
+                break;
+            case 1:
+                tileChargeStation.setEnergyStored((tileChargeStation.getEnergyStored() | 0xFFFF0000) & ((value << 16) | 0xFFFF ));
                 break;
             default:
                 break;
