@@ -312,7 +312,7 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
         }
     }
 
-    public double getEnergy() {
+    public int getEnergy() {
         return energyStorage.getEnergyStored();
     }
 
@@ -320,7 +320,7 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
         energyStorage.setEnergyStored(l);
     }
 
-    public double getEnergyCapacity() {
+    public int getEnergyCapacity() {
         return energyStorage.getMaxEnergyStored();
     }
 
@@ -374,6 +374,8 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
                 StatCollector.translateToLocal("tile" + "." + Reference.MOD_ID.toLowerCase() + ":" + Names.Blocks.CHARGE_STATION + ".name")
                         + " - " + tooltip);
         currenttip.add(String.format(StatCollector.translateToLocal(Messages.Tooltips.STATUS), workingStatus));
+
+
         return currenttip;
     }
 

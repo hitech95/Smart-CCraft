@@ -32,4 +32,9 @@ public class TileChargeStationMK3 extends TileChargeStation {
     public TileChargeStationMK3() {
         super(2);
     }
+
+    @Override
+    public List<String> attachWailaHead(List<String> currenttip) {
+        return this.attachWailaHead(currenttip);
+    }
 }

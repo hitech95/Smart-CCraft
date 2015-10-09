@@ -61,12 +61,12 @@ public class GuiChargeStation extends GuiContainer {
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
-        double storedEnergy = tileChargeStation.getEnergy();
-        double maxEnergy = tileChargeStation.getEnergyCapacity();
+        int storedEnergy = tileChargeStation.getEnergy();
+        int maxEnergy = tileChargeStation.getEnergyCapacity();
 
-        int energy = (int) (14 * (storedEnergy / maxEnergy));
+        int energy = (int) (14 * ((double) storedEnergy / (double)maxEnergy));
 
-        LogHelper.error("--------> RESIZED ENERGY:" + energy);
+        LogHelper.error("--------> RESIZED ENERGY:" + energy + " " + storedEnergy + "/" + maxEnergy);
         if (energy > 0) drawTexturedModalRect(xStart + 80, (yStart + 36) - energy, 176, 12 - energy, 14, energy + 2);
 
         if (func_146978_c(80, 36 - 14, 14, 14, x, y)) { //isPointInTRegion Old Mapping
