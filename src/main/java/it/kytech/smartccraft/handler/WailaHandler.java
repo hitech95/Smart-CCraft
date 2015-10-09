@@ -24,12 +24,14 @@ import it.kytech.smartccraft.tileentity.TileChargeStationMK2;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK3;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK4;
 import it.kytech.smartccraft.util.IWailaDataDisplay;
-import mcp.mobius.waila.api.*;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
+import mcp.mobius.waila.api.IWailaDataProvider;
+import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -39,8 +41,7 @@ import java.util.List;
  */
 public class WailaHandler implements IWailaDataProvider {
 
-    public static void callbackRegister(IWailaRegistrar registrar)
-    {
+    public static void callbackRegister(IWailaRegistrar registrar) {
         registrar.registerHeadProvider(new WailaHandler(), TileChargeStation.class);
         registrar.registerHeadProvider(new WailaHandler(), TileChargeStationMK2.class);
         registrar.registerHeadProvider(new WailaHandler(), TileChargeStationMK3.class);

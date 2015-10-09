@@ -20,7 +20,6 @@
 package it.kytech.smartccraft.init;
 
 import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
 import it.kytech.smartccraft.reference.Settings;
 
 /**
@@ -34,7 +33,7 @@ public class RecipesLoader {
             //GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rfCharger), "rlr", "lcl", "rer", 'r', "dustRedstone", 'l', "ingotLead", 'c', new ItemStack(GameRegistry.findItem("ThermalExpansion", "capacitor"), 1, 2), 'e', new ItemStack(GameRegistry.findItem("ThermalExpansion", "material"), 1, 3)));
         } else if (Settings.integrateBC && Loader.isModLoaded("BuildCraft|Core")) {
             //GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rfCharger), "rlr", "lcl", "rer", 'r', "dustRedstone", 'l', "gearIron", 'c', "gearGold", 'e', new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepowergold"))));
-        }else {
+        } else {
 
         }
     }

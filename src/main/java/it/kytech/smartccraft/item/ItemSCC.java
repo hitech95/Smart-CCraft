@@ -23,7 +23,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import it.kytech.smartccraft.creativetab.CreativeTab;
 import it.kytech.smartccraft.reference.Reference;
-import it.kytech.smartccraft.reference.Textures;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,7 +41,7 @@ public class ItemSCC extends Item {
 
     @Override
     public String getUnlocalizedName() {
-        return String.format("item.%s%s", Reference.MOD_ID  + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("item.%s%s", Reference.MOD_ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override

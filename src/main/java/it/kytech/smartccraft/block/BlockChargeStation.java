@@ -1,25 +1,24 @@
 /**
  * This file is part of SmartCCraft
- * <p/>
+ *
  * Copyright (c) 2015 hitech95 <https://github.com/hitech95>
  * Copyright (c) contributors
- * <p/>
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p/>
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p/>
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package it.kytech.smartccraft.block;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import it.kytech.smartccraft.SmartCCraft;
@@ -30,7 +29,6 @@ import it.kytech.smartccraft.tileentity.TileChargeStationMK2;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK3;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK4;
 import it.kytech.smartccraft.util.CenterFaceHelper;
-import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -139,7 +137,7 @@ public class BlockChargeStation extends BlockTileSCC implements ITileEntityProvi
 
         TileChargeStation tileChargeStation = (TileChargeStation) tileEntity;
 
-        if(!((TileChargeStation) tileEntity).isWorking()){
+        if (!((TileChargeStation) tileEntity).isWorking()) {
             return;
         }
 

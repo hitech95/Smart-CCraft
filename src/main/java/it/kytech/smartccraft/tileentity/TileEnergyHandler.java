@@ -19,18 +19,14 @@
  */
 package it.kytech.smartccraft.tileentity;
 
-import java.util.List;
+import cofh.api.energy.IEnergyHandler;
 
 /**
- * Created by M2K on 29/06/2014.
+ * Created by nicolo on 09/10/15.
  */
-public class TileChargeStationMK3 extends TileChargeStation {
-    public TileChargeStationMK3() {
-        super(2);
-    }
+public abstract class TileEnergyHandler extends TileEntitySCC implements IEnergyHandler {
 
-    @Override
-    public List<String> attachWailaHead(List<String> currenttip) {
-        return this.attachWailaHead(currenttip);
-    }
+    public abstract int getEnergyStored();
+
+    public abstract void setEnergyStored(int energy);
 }

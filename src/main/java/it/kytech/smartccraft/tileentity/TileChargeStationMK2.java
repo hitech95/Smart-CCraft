@@ -19,10 +19,6 @@
  */
 package it.kytech.smartccraft.tileentity;
 
-import it.kytech.smartccraft.reference.Names;
-import mcp.mobius.waila.api.SpecialChars;
-import net.minecraft.util.StatCollector;
-
 import java.util.List;
 
 /**

@@ -27,7 +27,6 @@ import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.Settings;
 import it.kytech.smartccraft.util.LogHelper;
 import net.minecraftforge.common.config.Configuration;
-import sun.rmi.runtime.Log;
 
 import java.io.File;
 

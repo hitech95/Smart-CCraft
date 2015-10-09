@@ -23,7 +23,7 @@ package it.kytech.smartccraft.reference;
  * Created by Hitech95 on 02/10/2015.
  */
 public class Messages {
-    public static class Tooltips{
+    public static class Tooltips {
         private static final String TOOLTIP_PREFIX = "tooltip." + Reference.MOD_ID.toLowerCase() + ":";
 
         public static final String ENERGY = TOOLTIP_PREFIX + "energy";

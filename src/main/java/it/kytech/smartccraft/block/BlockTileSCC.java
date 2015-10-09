@@ -23,7 +23,6 @@ package it.kytech.smartccraft.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import it.kytech.smartccraft.creativetab.CreativeTab;
-import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.Textures;
 import it.kytech.smartccraft.tileentity.TileEntitySCC;
 import net.minecraft.block.Block;

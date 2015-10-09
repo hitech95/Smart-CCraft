@@ -23,6 +23,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import it.kytech.smartccraft.network.message.MessageTileChargeStation;
+import it.kytech.smartccraft.network.message.MessageTileEnergy;
 import it.kytech.smartccraft.network.message.MessageTileEntitySCC;
 import it.kytech.smartccraft.reference.Reference;
 
@@ -32,5 +33,6 @@ public class PacketHandler {
     public static void init() {
         INSTANCE.registerMessage(MessageTileEntitySCC.class, MessageTileEntitySCC.class, 0, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileChargeStation.class, MessageTileChargeStation.class, 1, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEnergy.class, MessageTileEnergy.class, 2, Side.CLIENT);
     }
 }

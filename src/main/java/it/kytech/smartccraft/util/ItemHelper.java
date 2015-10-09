@@ -19,8 +19,6 @@
  */
 package it.kytech.smartccraft.util;
 
-import java.util.Comparator;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -30,10 +28,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class ItemHelper
-{
-    public static ItemStack cloneItemStack(ItemStack itemStack, int stackSize)
-    {
+import java.util.Comparator;
+
+public class ItemHelper {
+    public static ItemStack cloneItemStack(ItemStack itemStack, int stackSize) {
         ItemStack clonedItemStack = itemStack.copy();
         clonedItemStack.stackSize = stackSize;
         return clonedItemStack;
@@ -131,73 +129,45 @@ public class ItemHelper
         return -1;
     }
 
-    public static Comparator<ItemStack>	comparator	= new Comparator<ItemStack>()
-    {
+    public static Comparator<ItemStack> comparator = new Comparator<ItemStack>() {
         @Override
-        public int compare(ItemStack itemStack1, ItemStack itemStack2)
-        {
-            if (itemStack1 != null && itemStack2 != null)
-            {
+        public int compare(ItemStack itemStack1, ItemStack itemStack2) {
+            if (itemStack1 != null && itemStack2 != null) {
                 // Sort on itemID
-                if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
-                {
+                if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0) {
                     // Sort on item
-                    if (itemStack1.getItem() == itemStack2.getItem())
-                    {
+                    if (itemStack1.getItem() == itemStack2.getItem()) {
                         // Then sort on meta
-                        if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
-                        {
+                        if (itemStack1.getItemDamage() == itemStack2.getItemDamage()) {
                             // Then sort on NBT
-                            if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
-                            {
+                            if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
                                 // Then sort on stack size
-                                if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2))
-                                {
+                                if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2)) {
                                     return (itemStack1.stackSize - itemStack2.stackSize);
-                                }
-                                else
-                                {
+                                } else {
                                     return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
                                 }
-                            }
-                            else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound())
-                            {
+                            } else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound()) {
                                 return -1;
-                            }
-                            else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound()))
-                            {
+                            } else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound())) {
                                 return 1;
-                            }
-                            else
-                            {
+                            } else {
                                 return (itemStack1.stackSize - itemStack2.stackSize);
                             }
-                        }
-                        else
-                        {
+                        } else {
                             return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
                         }
-                    }
-                    else
-                    {
+                    } else {
                         return itemStack1.getItem().getUnlocalizedName(itemStack1).compareToIgnoreCase(itemStack2.getItem().getUnlocalizedName(itemStack2));
                     }
-                }
-                else
-                {
+                } else {
                     return Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem());
                 }
-            }
-            else if (itemStack1 != null)
-            {
+            } else if (itemStack1 != null) {
                 return -1;
-            }
-            else if (itemStack2 != null)
-            {
+            } else if (itemStack2 != null) {
                 return 1;
-            }
-            else
-            {
+            } else {
                 return 0;
             }
         }
@@ -214,35 +184,25 @@ public class ItemHelper
      *            The second ItemStack being tested for equality
      * @return true if the two ItemStacks are equivalent, false otherwise
      */
-    public static boolean equals(ItemStack first, ItemStack second)
-    {
+    public static boolean equals(ItemStack first, ItemStack second) {
         return (comparator.compare(first, second) == 0);
     }
 
-    public static boolean equalsIgnoreStackSize(ItemStack itemStack1, ItemStack itemStack2)
-    {
-        if (itemStack1 != null && itemStack2 != null)
-        {
+    public static boolean equalsIgnoreStackSize(ItemStack itemStack1, ItemStack itemStack2) {
+        if (itemStack1 != null && itemStack2 != null) {
             // Sort on itemID
-            if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
-            {
+            if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0) {
                 // Sort on item
-                if (itemStack1.getItem() == itemStack2.getItem())
-                {
+                if (itemStack1.getItem() == itemStack2.getItem()) {
                     // Then sort on meta
-                    if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
-                    {
+                    if (itemStack1.getItemDamage() == itemStack2.getItemDamage()) {
                         // Then sort on NBT
-                        if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
-                        {
+                        if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
                             // Then sort on stack size
-                            if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2))
-                            {
+                            if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2)) {
                                 return true;
                             }
-                        }
-                        else
-                        {
+                        } else {
                             return true;
                         }
                     }
@@ -253,15 +213,12 @@ public class ItemHelper
         return false;
     }
 
-    public static int compare(ItemStack itemStack1, ItemStack itemStack2)
-    {
+    public static int compare(ItemStack itemStack1, ItemStack itemStack2) {
         return comparator.compare(itemStack1, itemStack2);
     }
 
-    public static String toString(ItemStack itemStack)
-    {
-        if (itemStack != null)
-        {
+    public static String toString(ItemStack itemStack) {
+        if (itemStack != null) {
             return String.format("%sxitemStack[%s@%s]", itemStack.stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage());
         }
 
@@ -270,6 +227,7 @@ public class ItemHelper
 
     // Taken from CodeChickenLib. All credits to Chicken-Bones
     // TODO: Add to credits.
+
     /**
      * NBT item loading function with support for stack sizes > 32K
      */

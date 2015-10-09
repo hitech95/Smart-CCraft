@@ -1,19 +1,19 @@
 /**
  * This file is part of SmartCCraft
- * <p/>
+ *
  * Copyright (c) 2015 hitech95 <https://github.com/hitech95>
  * Copyright (c) contributors
- * <p/>
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p/>
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p/>
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -46,7 +46,7 @@ import java.util.List;
 /**
  * Created by M2K on 29/06/2014.
  */
-public class TileChargeStation extends TileEntitySCC implements ISidedInventory, IEnergyReceiver, IWailaDataDisplay {
+public class TileChargeStation extends TileEnergyHandler implements ISidedInventory, IEnergyReceiver, IWailaDataDisplay {
 
     public enum STATES {
         REDSTONE_DISABLED,
@@ -312,11 +312,13 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
         }
     }
 
-    public int getEnergy() {
+    @Override
+    public int getEnergyStored() {
         return energyStorage.getEnergyStored();
     }
 
-    public void setEnergy(int l) {
+    @Override
+    public void setEnergyStored(int l) {
         energyStorage.setEnergyStored(l);
     }
 
@@ -327,6 +329,11 @@ public class TileChargeStation extends TileEntitySCC implements ISidedInventory,
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
         return (from != getOrientation()) ? energyStorage.receiveEnergy(maxReceive, simulate) : 0;
+    }
+
+    @Override
+    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+        return 0;
     }
 
     @Override

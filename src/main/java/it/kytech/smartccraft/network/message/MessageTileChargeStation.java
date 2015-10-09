@@ -1,3 +1,22 @@
+/**
+ * This file is part of SmartCCraft
+ *
+ * Copyright (c) 2015 hitech95 <https://github.com/hitech95>
+ * Copyright (c) contributors
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package it.kytech.smartccraft.network.message;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -47,12 +66,9 @@ public class MessageTileChargeStation implements IMessage, IMessageHandler<Messa
         this.state = buf.readByte();
         int customNameLength = buf.readInt();
         this.customName = new String(buf.readBytes(customNameLength).array());
-        if (buf.readBoolean())
-        {
+        if (buf.readBoolean()) {
             this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
-        }
-        else
-        {
+        } else {
             this.ownerUUID = null;
         }
         this.status = buf.readByte();
@@ -67,14 +83,11 @@ public class MessageTileChargeStation implements IMessage, IMessageHandler<Messa
         buf.writeByte(state);
         buf.writeInt(customName.length());
         buf.writeBytes(customName.getBytes());
-        if (ownerUUID != null)
-        {
+        if (ownerUUID != null) {
             buf.writeBoolean(true);
             buf.writeLong(ownerUUID.getMostSignificantBits());
             buf.writeLong(ownerUUID.getLeastSignificantBits());
-        }
-        else
-        {
+        } else {
             buf.writeBoolean(false);
         }
         buf.writeByte(status);

@@ -57,12 +57,9 @@ public class MessageTileEntitySCC implements IMessage, IMessageHandler<MessageTi
         this.state = buf.readByte();
         int customNameLength = buf.readInt();
         this.customName = new String(buf.readBytes(customNameLength).array());
-        if (buf.readBoolean())
-        {
+        if (buf.readBoolean()) {
             this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
-        }
-        else
-        {
+        } else {
             this.ownerUUID = null;
         }
         fromBytesChild(buf);
@@ -77,14 +74,11 @@ public class MessageTileEntitySCC implements IMessage, IMessageHandler<MessageTi
         buf.writeByte(state);
         buf.writeInt(customName.length());
         buf.writeBytes(customName.getBytes());
-        if (ownerUUID != null)
-        {
+        if (ownerUUID != null) {
             buf.writeBoolean(true);
             buf.writeLong(ownerUUID.getMostSignificantBits());
             buf.writeLong(ownerUUID.getLeastSignificantBits());
-        }
-        else
-        {
+        } else {
             buf.writeBoolean(false);
         }
         toBytesChild(buf);

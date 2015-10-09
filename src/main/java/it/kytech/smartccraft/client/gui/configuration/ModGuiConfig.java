@@ -20,7 +20,6 @@
 package it.kytech.smartccraft.client.gui.configuration;
 
 
-import cpw.mods.fml.client.config.DummyConfigElement;
 import cpw.mods.fml.client.config.DummyConfigElement.DummyCategoryElement;
 import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
@@ -29,10 +28,8 @@ import it.kytech.smartccraft.client.gui.configuration.category.CategoryGeneral;
 import it.kytech.smartccraft.client.gui.configuration.category.CategoryIntegration;
 import it.kytech.smartccraft.handler.ConfigurationHandler;
 import it.kytech.smartccraft.reference.Reference;
-import it.kytech.smartccraft.reference.Settings;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.config.ConfigElement;
 
 import java.util.ArrayList;
 import java.util.List;
