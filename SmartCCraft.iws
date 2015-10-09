@@ -1,31 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2be2a23-9b6c-45bb-ad54-849c430b8797" name="Default" comment="Update synk between Server and Client, now particle effects works...">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/network/message/MessageTileEnergy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/tileentity/TileEnergyHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/block/BlockChargeStation.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/block/BlockChargeStation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/block/BlockTileSCC.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/block/BlockTileSCC.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/util/CCHelper.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/util/CCHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/util/CenterFaceHelper.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/util/CenterFaceHelper.java" />
+    <list default="true" id="d2be2a23-9b6c-45bb-ad54-849c430b8797" name="Default" comment="Update to synk back to home.&#10;&#10;Code Reformat &amp; Import Optimize&#10;+Message to synk Energy&#10;+Tile for RF energy handler&#10;+Implemented Slot accept only ElectricItem&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/handler/ConfigurationHandler.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/handler/ConfigurationHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/inventory/ContainerChargeStation.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/inventory/ContainerChargeStation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/inventory/slot/ElectricSlot.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/inventory/slot/ElectricSlot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/client/gui/inventory/GuiChargeStation.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/client/gui/inventory/GuiChargeStation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/util/ItemHelper.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/util/ItemHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/item/ItemSCC.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/item/ItemSCC.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/network/message/MessageTileChargeStation.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/network/message/MessageTileChargeStation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/network/message/MessageTileEntitySCC.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/network/message/MessageTileEntitySCC.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/reference/Messages.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/reference/Messages.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/client/gui/configuration/ModGuiConfig.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/client/gui/configuration/ModGuiConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/network/PacketHandler.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/network/PacketHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/init/RecipesLoader.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/init/RecipesLoader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SmartCCraft.iws" afterPath="$PROJECT_DIR$/SmartCCraft.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/tileentity/TileChargeStation.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/tileentity/TileChargeStation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/tileentity/TileChargeStationMK2.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/tileentity/TileChargeStationMK2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/tileentity/TileChargeStationMK3.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/tileentity/TileChargeStationMK3.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/tileentity/TileChargeStationMK4.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/tileentity/TileChargeStationMK4.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/handler/WailaHandler.java" afterPath="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/handler/WailaHandler.java" />
     </list>
     <ignored path="SmartCCraft.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -89,7 +68,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/inventory/ContainerChargeStation.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+              <caret line="76" column="78" selection-start-line="76" selection-start-column="78" selection-end-line="76" selection-end-column="78" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -101,8 +80,10 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/handler/ConfigurationHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
-              <folding />
+              <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -168,8 +149,8 @@
         <option value="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/network/message/MessageTileEnergy.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/network/PacketHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/inventory/slot/ElectricSlot.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/inventory/ContainerChargeStation.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/handler/ConfigurationHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/inventory/ContainerChargeStation.java" />
       </list>
     </option>
   </component>
@@ -658,7 +639,13 @@
       <option name="project" value="LOCAL" />
       <updated>1444246118031</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update to synk back to home.&#10;&#10;Code Reformat &amp; Import Optimize&#10;+Message to synk Energy&#10;+Tile for RF energy handler&#10;+Implemented Slot accept only ElectricItem&#10;">
+      <created>1444381803655</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1444381803655</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -672,7 +659,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="710" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32293987" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -683,8 +670,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850778" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.73357016" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.26642984" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.72291297" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.27708703" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -713,7 +700,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update synk between Server and Client, now particle effects works..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update synk between Server and Client, now particle effects works..." />
+    <MESSAGE value="Update to synk back to home.&#10;&#10;Code Reformat &amp; Import Optimize&#10;+Message to synk Energy&#10;+Tile for RF energy handler&#10;" />
+    <MESSAGE value="Update to synk back to home.&#10;&#10;Code Reformat &amp; Import Optimize&#10;+Message to synk Energy&#10;+Tile for RF energy handler&#10;+Implemented Slot accept only ElectricItem&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update to synk back to home.&#10;&#10;Code Reformat &amp; Import Optimize&#10;+Message to synk Energy&#10;+Tile for RF energy handler&#10;+Implemented Slot accept only ElectricItem&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1017,7 +1006,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5224719">
           <caret line="80" column="38" selection-start-line="80" selection-start-column="23" selection-end-line="80" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1069,7 +1057,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/inventory/ContainerChargeStation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+          <caret line="76" column="78" selection-start-line="76" selection-start-column="78" selection-end-line="76" selection-end-column="78" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1079,8 +1067,10 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/it/kytech/smartccraft/handler/ConfigurationHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
-          <folding />
+          <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

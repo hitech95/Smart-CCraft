@@ -20,8 +20,11 @@
 package it.kytech.smartccraft.inventory;
 
 import it.kytech.smartccraft.inventory.slot.ElectricSlot;
+import it.kytech.smartccraft.network.PacketHandler;
+import it.kytech.smartccraft.network.message.MessageTileEnergy;
 import it.kytech.smartccraft.tileentity.TileChargeStation;
 import it.kytech.smartccraft.util.LogHelper;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 
@@ -40,9 +43,13 @@ public class ContainerChargeStation extends ContainerSCC {
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting var1) {
-        super.addCraftingToCrafters(var1);
-        var1.sendProgressBarUpdate(this, 0, tileChargeStation.getEnergyStored());
+    public void addCraftingToCrafters(ICrafting iCrafting) {
+        super.addCraftingToCrafters(iCrafting);
+        //var1.sendProgressBarUpdate(this, 0, tileChargeStation.getEnergyStored()); //is short not int
+
+        if(iCrafting instanceof EntityPlayerMP){
+            PacketHandler.INSTANCE.sendTo(new MessageTileEnergy(tileChargeStation), (EntityPlayerMP) iCrafting);
+        }
     }
 
     @Override
@@ -51,7 +58,11 @@ public class ContainerChargeStation extends ContainerSCC {
 
         for (ICrafting crafter : (List<ICrafting>) crafters) {
             if (lastEnergy != tileChargeStation.getEnergyStored()) {
-                crafter.sendProgressBarUpdate(this, 0, tileChargeStation.getEnergyStored());
+
+                if(crafter instanceof EntityPlayerMP){
+                    PacketHandler.INSTANCE.sendTo(new MessageTileEnergy(tileChargeStation), (EntityPlayerMP) crafter);
+                }
+
                 LogHelper.error("BEFORE PACKET:" + tileChargeStation.getEnergyStored());
             }
         }
@@ -63,7 +74,7 @@ public class ContainerChargeStation extends ContainerSCC {
     public void updateProgressBar(int index, int value) {
         switch (index) {
             case 0:
-                tileChargeStation.setEnergyStored(value);
+                //tileChargeStation.setEnergyStored(value); //is short not int
                 LogHelper.error("AFTER PACKET:" + value);
                 break;
             default:
