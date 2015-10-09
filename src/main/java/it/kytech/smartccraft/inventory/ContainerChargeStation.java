@@ -50,7 +50,7 @@ public class ContainerChargeStation extends ContainerSCC {
 
         if(iCrafting instanceof EntityPlayerMP){
             PacketHandler.INSTANCE.sendTo(new MessageTileEnergy(tileChargeStation), (EntityPlayerMP) iCrafting);
-            LogHelper.error("FIRST PACKET:" + tileChargeStation.getEnergyStored());
+            LogHelper.error("FIRST PACKET:" + tileChargeStation.getEnergyStored()); //TODO: remove debug
         }else{
             short low = (short) (tileChargeStation.getEnergyStored() & 0xFFFF);
             short hi = (short) ((tileChargeStation.getEnergyStored() >> 16) & 0xFFFF);
@@ -68,7 +68,7 @@ public class ContainerChargeStation extends ContainerSCC {
 
                 if(crafter instanceof EntityPlayerMP){
                     PacketHandler.INSTANCE.sendTo(new MessageTileEnergy(tileChargeStation), (EntityPlayerMP) crafter);
-                    LogHelper.error("BEFORE PACKET:" + tileChargeStation.getEnergyStored());
+                    LogHelper.error("BEFORE PACKET:" + tileChargeStation.getEnergyStored()); //TODO: remove debug
                 }else{
                     short low = (short) (tileChargeStation.getEnergyStored() & 0xFFFF);
                     short hi = (short) ((tileChargeStation.getEnergyStored() >> 16) & 0xFFFF);

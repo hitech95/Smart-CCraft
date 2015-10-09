@@ -104,7 +104,7 @@ public class MessageTileChargeStation implements IMessage, IMessageHandler<Messa
             ((TileChargeStation) tileEntity).setOwnerUUID(message.ownerUUID);
             ((TileChargeStation) tileEntity).setStatus(TileChargeStation.STATES.values()[message.status]);
 
-            LogHelper.error("----> Message working: " + ((TileChargeStation) tileEntity).isWorking());
+            LogHelper.info("----> Message working: " + ((TileChargeStation) tileEntity).isWorking()); //TODO: remove debug
         }
 
         return null;

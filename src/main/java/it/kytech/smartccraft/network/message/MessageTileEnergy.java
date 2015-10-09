@@ -73,10 +73,12 @@ public class MessageTileEnergy implements IMessage, IMessageHandler<MessageTileE
     public IMessage onMessage(MessageTileEnergy message, MessageContext ctx) {
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
 
+        LogHelper.info("Message Energy"); //TODO: remove debug
+
         if (tileEntity instanceof TileEnergyHandler) {
             ((TileEnergyHandler) tileEntity).setEnergyStored(message.energy);
 
-            LogHelper.info("Message Energy Received: " + ((TileEnergyHandler) tileEntity).getEnergyStored());
+            LogHelper.info("Message Energy Received: " + ((TileEnergyHandler) tileEntity).getEnergyStored()); //TODO: remove debug
         }
 
         return null;
