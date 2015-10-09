@@ -66,7 +66,7 @@ public class GuiChargeStation extends GuiContainer {
 
         int energy = (int) (14 * ((double) storedEnergy / (double) maxEnergy));
 
-        LogHelper.error("--------> RESIZED ENERGY:" + energy + " " + storedEnergy + "/" + maxEnergy);
+        //LogHelper.error("--------> RESIZED ENERGY:" + energy + " " + storedEnergy + "/" + maxEnergy);
         if (energy > 0) drawTexturedModalRect(xStart + 80, (yStart + 36) - energy, 176, 12 - energy, 14, energy + 2);
 
         if (func_146978_c(80, 36 - 14, 14, 14, x, y)) { //isPointInTRegion Old Mapping

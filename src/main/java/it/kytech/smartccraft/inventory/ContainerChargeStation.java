@@ -46,9 +46,16 @@ public class ContainerChargeStation extends ContainerSCC {
     public void addCraftingToCrafters(ICrafting iCrafting) {
         super.addCraftingToCrafters(iCrafting);
         //var1.sendProgressBarUpdate(this, 0, tileChargeStation.getEnergyStored()); //is short not int
+        //splitting an int to 2 shorts: (short) value & 0xFFFF and (short) (value >> 16) & 0xFFFF
 
         if(iCrafting instanceof EntityPlayerMP){
             PacketHandler.INSTANCE.sendTo(new MessageTileEnergy(tileChargeStation), (EntityPlayerMP) iCrafting);
+            LogHelper.error("FIRST PACKET:" + tileChargeStation.getEnergyStored());
+        }else{
+            short low = (short) (tileChargeStation.getEnergyStored() & 0xFFFF);
+            short hi = (short) ((tileChargeStation.getEnergyStored() >> 16) & 0xFFFF);
+            iCrafting.sendProgressBarUpdate(this, 0, low);
+            iCrafting.sendProgressBarUpdate(this, 1, hi);
         }
     }
 
@@ -61,9 +68,13 @@ public class ContainerChargeStation extends ContainerSCC {
 
                 if(crafter instanceof EntityPlayerMP){
                     PacketHandler.INSTANCE.sendTo(new MessageTileEnergy(tileChargeStation), (EntityPlayerMP) crafter);
+                    LogHelper.error("BEFORE PACKET:" + tileChargeStation.getEnergyStored());
+                }else{
+                    short low = (short) (tileChargeStation.getEnergyStored() & 0xFFFF);
+                    short hi = (short) ((tileChargeStation.getEnergyStored() >> 16) & 0xFFFF);
+                    crafter.sendProgressBarUpdate(this, 0, low);
+                    crafter.sendProgressBarUpdate(this, 1, hi);
                 }
-
-                LogHelper.error("BEFORE PACKET:" + tileChargeStation.getEnergyStored());
             }
         }
 
@@ -75,7 +86,7 @@ public class ContainerChargeStation extends ContainerSCC {
         switch (index) {
             case 0:
                 //tileChargeStation.setEnergyStored(value); //is short not int
-                LogHelper.error("AFTER PACKET:" + value);
+                //LogHelper.error("AFTER PACKET:" + value);
                 break;
             default:
                 break;
