@@ -26,11 +26,14 @@ import it.kytech.smartccraft.network.message.MessageTileChargeStation;
 import it.kytech.smartccraft.network.message.MessageTileEnergy;
 import it.kytech.smartccraft.network.message.MessageTileEntitySCC;
 import it.kytech.smartccraft.reference.Reference;
+import it.kytech.smartccraft.util.LogHelper;
 
 public class PacketHandler {
     public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.LOWERCASE_MOD_ID);
 
     public static void init() {
+        LogHelper.info("Registering Network");
+
         INSTANCE.registerMessage(MessageTileEntitySCC.class, MessageTileEntitySCC.class, 0, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileChargeStation.class, MessageTileChargeStation.class, 1, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEnergy.class, MessageTileEnergy.class, 2, Side.CLIENT);

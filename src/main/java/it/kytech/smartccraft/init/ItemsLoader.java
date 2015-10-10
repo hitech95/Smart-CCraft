@@ -19,11 +19,14 @@
  */
 package it.kytech.smartccraft.init;
 
+import it.kytech.smartccraft.util.LogHelper;
+
 /**
  * Created by M2K on 27/06/2014.
  */
 public class ItemsLoader {
 
     public static void init() {
+        LogHelper.info("Registering Items");
     }
 }

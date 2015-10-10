@@ -46,6 +46,8 @@ public class ConfigurationHandler {
     }
 
     public static void loadConfiguration() {
+        LogHelper.info("Loading Config");
+
         try {
             //General
             configuration.setCategoryComment(Settings.GENERAL_CATEGORY, "General options");
@@ -75,7 +77,7 @@ public class ConfigurationHandler {
             Settings.conversionRatioChargeStation = configuration.get(Settings.ENERGY_CATEGORY, Settings.ENERGY_PATH_CONVERSION_RATIO_CHARGE_STATION, Energy.DEFAULT_CONVERSION_RATIO_CHARGE_STATION, "Amount of RF per turtle fuel value").getInt();
 
         } catch (Exception e) {
-            LogHelper.info("Config File not found...");
+            LogHelper.warn("Config File not found...");
         } finally {
             if (configuration.hasChanged()) {
                 configuration.save();

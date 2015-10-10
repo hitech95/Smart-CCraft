@@ -22,14 +22,17 @@ package it.kytech.smartccraft.proxy;
 import cpw.mods.fml.common.registry.GameRegistry;
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.tileentity.*;
+import it.kytech.smartccraft.util.LogHelper;
 
 /**
  * Created by M2K on 27/06/2014.
  */
 public abstract class CommonProxy implements IProxy {
-    public void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileAssembler.class, "tile." + Names.Blocks.ASSEMBLER);
 
+    public void registerTileEntities() {
+        LogHelper.info("Registering Tiles");
+
+        GameRegistry.registerTileEntity(TileAssembler.class, "tile." + Names.Blocks.ASSEMBLER);
         GameRegistry.registerTileEntity(TileChargeStation.class, "tile." + Names.Blocks.CHARGE_STATION);
         GameRegistry.registerTileEntity(TileChargeStationMK2.class, "tile." + Names.Blocks.CHARGE_STATION_2);
         GameRegistry.registerTileEntity(TileChargeStationMK3.class, "tile." + Names.Blocks.CHARGE_STATION_3);

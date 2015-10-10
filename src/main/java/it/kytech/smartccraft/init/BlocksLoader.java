@@ -25,6 +25,7 @@ import it.kytech.smartccraft.item.ItemBlockChargeStation;
 import it.kytech.smartccraft.item.ItemBlockFrame;
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.reference.Reference;
+import it.kytech.smartccraft.util.LogHelper;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class BlocksLoader {
@@ -34,6 +35,8 @@ public class BlocksLoader {
     public static final BlockTileSCC chargeStation = new BlockChargeStation();
 
     public static void init() {
+        LogHelper.info("Registering Blocks");
+
         GameRegistry.registerBlock(frameBlock, ItemBlockFrame.class, Names.Blocks.FRAME);
         GameRegistry.registerBlock(assemblerBlock, Names.Blocks.ASSEMBLER);
         GameRegistry.registerBlock(chargeStation, ItemBlockChargeStation.class, Names.Blocks.CHARGE_STATION);
