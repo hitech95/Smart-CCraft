@@ -19,6 +19,8 @@
  */
 package it.kytech.smartccraft.block;
 
+import cofh.api.block.IDismantleable;
+import cofh.lib.util.position.IRotateableTile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import it.kytech.smartccraft.SmartCCraft;
@@ -44,10 +46,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockChargeStation extends BlockTileSCC implements ITileEntityProvider {
+public class BlockChargeStation extends BlockTileSCC implements ITileEntityProvider, IDismantleable {
 
     public static final int MAX_TIER = 3;
 
@@ -206,4 +209,41 @@ public class BlockChargeStation extends BlockTileSCC implements ITileEntityProvi
             ((TileChargeStation) world.getTileEntity(x, y, z)).setRedstoneState(state);
         }
     }
+
+    @Override
+    public boolean rotateBlock(World world, int x, int y, int z, ForgeDirection axis) {
+        if (world.isRemote) {
+            return false;
+        }
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof IRotateableTile) {
+            IRotateableTile tile = ((IRotateableTile) te);
+            if (tile.canRotate(axis)) {
+                tile.rotate(axis);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @Override
+    public boolean canDismantle(EntityPlayer entityPlayer, World world, int i, int i1, int i2) {
+        return true;
+    }
+
+
+    @Override
+    public ArrayList<ItemStack> dismantleBlock(EntityPlayer entityPlayer, World world, int x, int y, int z, boolean returnBlock) {
+        ArrayList<ItemStack> list = getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+
+        world.setBlockToAir(x, y, z);
+        if (!returnBlock) {
+            for (ItemStack item : list) {
+                dropBlockAsItem(world, x, y, z, item);
+            }
+        }
+        return list;
+    }
+
 }

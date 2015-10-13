@@ -4,12 +4,14 @@ Make Computercraft more smart!
 ### Features:
 
   - Charge Turtles with RF
+  - Rotate the Charge Station using a Hammer or a Wrench
   - Package items using 2x2 or 3x3 pattern
-  - 1 Decorative Block
+  - Decorative Blocks
   - WAILA Itegrated
   
 ### Todo's
-  - Fix WAILA
+  - Implement the Packager
+  - Add custom Particle effect on ChargeStaion
   - Implement ISidedInventory
 
 ### Contribute

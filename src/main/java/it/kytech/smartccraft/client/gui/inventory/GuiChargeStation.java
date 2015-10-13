@@ -40,7 +40,7 @@ public class GuiChargeStation extends GuiContainer {
         super(new ContainerChargeStation(inventoryPlayer, tileChargeStation));
         this.tileChargeStation = tileChargeStation;
         xSize = 176;
-        ySize = 166; //TODO: why not set?
+        ySize = 166;
     }
 
     @Override

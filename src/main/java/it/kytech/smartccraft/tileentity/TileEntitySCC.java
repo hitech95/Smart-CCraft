@@ -51,10 +51,12 @@ public class TileEntitySCC extends TileEntity {
 
     public void setOrientation(ForgeDirection orientation) {
         this.orientation = orientation;
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
     public void setOrientation(int orientation) {
         this.orientation = ForgeDirection.getOrientation(orientation);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
     public short getState() {

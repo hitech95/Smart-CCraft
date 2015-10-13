@@ -22,6 +22,7 @@ package it.kytech.smartccraft.tileentity;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyReceiver;
+import cofh.lib.util.position.IRotateableTile;
 import dan200.computercraft.api.turtle.ITurtleAccess;
 import it.kytech.smartccraft.network.PacketHandler;
 import it.kytech.smartccraft.network.message.MessageTileChargeStation;
@@ -31,7 +32,6 @@ import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.Settings;
 import it.kytech.smartccraft.util.CCHelper;
 import it.kytech.smartccraft.util.IWailaDataDisplay;
-import it.kytech.smartccraft.util.LogHelper;
 import mcp.mobius.waila.api.SpecialChars;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -47,7 +47,8 @@ import java.util.List;
 /**
  * Created by M2K on 29/06/2014.
  */
-public class TileChargeStation extends TileEnergyHandler implements ISidedInventory, IEnergyReceiver, IWailaDataDisplay {
+public class TileChargeStation extends TileEnergyHandler implements ISidedInventory, IEnergyReceiver, IWailaDataDisplay, IRotateableTile {
+
 
     public enum STATES {
         REDSTONE_DISABLED,
@@ -353,9 +354,38 @@ public class TileChargeStation extends TileEnergyHandler implements ISidedInvent
     }
 
     @Override
-    public List<String> attachWailaHead(List<String> currenttip) {
-        LogHelper.info("Attach Head: " + currenttip);
+    public boolean canRotate() {
+        return true;
+    }
 
+    @Override
+    public boolean canRotate(ForgeDirection forgeDirection) {
+        return true;
+    }
+
+    @Override
+    public void rotate(ForgeDirection forgeDirection) {
+        if (canRotate(forgeDirection) && !worldObj.isRemote) {
+            if (getOrientation() == forgeDirection) {
+                setOrientation(getOrientation().getOpposite());
+            } else {
+                setOrientation(forgeDirection);
+            }
+        }
+    }
+
+    @Override
+    public void rotateDirectlyTo(int i) {
+        setOrientation(i);
+    }
+
+    @Override
+    public ForgeDirection getDirectionFacing() {
+        return getOrientation();
+    }
+
+    @Override
+    public List<String> attachWailaHead(List<String> currenttip) {
         currenttip.clear(); //Try to clean before attach
 
         String tooltip;
