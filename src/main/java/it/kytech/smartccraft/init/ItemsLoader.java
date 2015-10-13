@@ -19,7 +19,7 @@
  */
 package it.kytech.smartccraft.init;
 
-import it.kytech.smartccraft.util.LogHelper;
+import it.kytech.smartccraft.util.helper.LogHelper;
 
 /**
  * Created by M2K on 27/06/2014.

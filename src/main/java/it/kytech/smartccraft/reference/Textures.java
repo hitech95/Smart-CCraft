@@ -19,7 +19,7 @@
  */
 package it.kytech.smartccraft.reference;
 
-import it.kytech.smartccraft.util.ResourceLocationHelper;
+import it.kytech.smartccraft.util.helper.ResourceLocationHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 

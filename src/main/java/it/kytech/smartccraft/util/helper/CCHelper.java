@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package it.kytech.smartccraft.util;
+package it.kytech.smartccraft.util.helper;
 
 import dan200.computercraft.api.turtle.ITurtleAccess;
 import net.minecraft.tileentity.TileEntity;

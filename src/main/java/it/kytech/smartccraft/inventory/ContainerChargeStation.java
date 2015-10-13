@@ -23,7 +23,6 @@ import it.kytech.smartccraft.inventory.slot.ElectricSlot;
 import it.kytech.smartccraft.network.PacketHandler;
 import it.kytech.smartccraft.network.message.MessageTileEnergy;
 import it.kytech.smartccraft.tileentity.TileChargeStation;
-import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;

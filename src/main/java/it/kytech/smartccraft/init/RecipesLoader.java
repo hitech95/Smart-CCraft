@@ -22,7 +22,7 @@ package it.kytech.smartccraft.init;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import it.kytech.smartccraft.reference.Settings;
-import it.kytech.smartccraft.util.LogHelper;
+import it.kytech.smartccraft.util.helper.LogHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

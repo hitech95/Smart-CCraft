@@ -30,8 +30,9 @@ import it.kytech.smartccraft.reference.Messages;
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.Settings;
-import it.kytech.smartccraft.util.CCHelper;
+import it.kytech.smartccraft.util.helper.CCHelper;
 import it.kytech.smartccraft.util.IWailaDataDisplay;
+import it.kytech.smartccraft.util.helper.LogHelper;
 import mcp.mobius.waila.api.SpecialChars;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -371,6 +372,8 @@ public class TileChargeStation extends TileEnergyHandler implements ISidedInvent
             } else {
                 setOrientation(forgeDirection);
             }
+            this.markDirty();
+            worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
         }
     }
 

@@ -25,7 +25,7 @@ import it.kytech.smartccraft.reference.Energy;
 import it.kytech.smartccraft.reference.Integration;
 import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.Settings;
-import it.kytech.smartccraft.util.LogHelper;
+import it.kytech.smartccraft.util.helper.LogHelper;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;

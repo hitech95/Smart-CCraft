@@ -26,7 +26,7 @@ import it.kytech.smartccraft.network.message.MessageTileChargeStation;
 import it.kytech.smartccraft.network.message.MessageTileEnergy;
 import it.kytech.smartccraft.network.message.MessageTileEntitySCC;
 import it.kytech.smartccraft.reference.Reference;
-import it.kytech.smartccraft.util.LogHelper;
+import it.kytech.smartccraft.util.helper.LogHelper;
 
 public class PacketHandler {
     public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.LOWERCASE_MOD_ID);

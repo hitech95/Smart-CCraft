@@ -30,7 +30,7 @@ import it.kytech.smartccraft.tileentity.TileChargeStation;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK2;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK3;
 import it.kytech.smartccraft.tileentity.TileChargeStationMK4;
-import it.kytech.smartccraft.util.CenterFaceHelper;
+import it.kytech.smartccraft.util.helper.CenterFaceHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;

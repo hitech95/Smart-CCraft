@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package it.kytech.smartccraft.util;
+package it.kytech.smartccraft.util.helper;
 
 /**
  * Created by Hitech95 on 07/10/2015.

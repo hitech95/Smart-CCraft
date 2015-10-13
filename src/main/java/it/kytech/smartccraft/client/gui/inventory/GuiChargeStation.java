@@ -26,7 +26,6 @@ import it.kytech.smartccraft.reference.Messages;
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.reference.Textures;
 import it.kytech.smartccraft.tileentity.TileChargeStation;
-import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;

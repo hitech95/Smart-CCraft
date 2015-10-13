@@ -22,7 +22,7 @@ package it.kytech.smartccraft.proxy;
 import cpw.mods.fml.common.registry.GameRegistry;
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.tileentity.*;
-import it.kytech.smartccraft.util.LogHelper;
+import it.kytech.smartccraft.util.helper.LogHelper;
 
 /**
  * Created by M2K on 27/06/2014.

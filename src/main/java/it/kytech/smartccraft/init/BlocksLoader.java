@@ -25,7 +25,7 @@ import it.kytech.smartccraft.item.ItemBlockChargeStation;
 import it.kytech.smartccraft.item.ItemBlockFrame;
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.reference.Reference;
-import it.kytech.smartccraft.util.LogHelper;
+import it.kytech.smartccraft.util.helper.LogHelper;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class BlocksLoader {

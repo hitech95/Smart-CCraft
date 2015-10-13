@@ -20,8 +20,6 @@
 package it.kytech.smartccraft.inventory.slot;
 
 import cofh.api.energy.IEnergyContainerItem;
-import cofh.api.energy.ItemEnergyContainer;
-import it.kytech.smartccraft.util.LogHelper;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
