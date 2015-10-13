@@ -43,11 +43,6 @@ public class WailaHandler implements IWailaDataProvider {
 
     public static void callbackRegister(IWailaRegistrar registrar) {
         registrar.registerHeadProvider(new WailaHandler(), TileChargeStation.class);
-        registrar.registerHeadProvider(new WailaHandler(), TileChargeStationMK2.class);
-        registrar.registerHeadProvider(new WailaHandler(), TileChargeStationMK3.class);
-        registrar.registerHeadProvider(new WailaHandler(), TileChargeStationMK4.class);
-
-
     }
 
     @Override

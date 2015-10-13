@@ -31,6 +31,7 @@ import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.Settings;
 import it.kytech.smartccraft.util.CCHelper;
 import it.kytech.smartccraft.util.IWailaDataDisplay;
+import it.kytech.smartccraft.util.LogHelper;
 import mcp.mobius.waila.api.SpecialChars;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -353,6 +354,10 @@ public class TileChargeStation extends TileEnergyHandler implements ISidedInvent
 
     @Override
     public List<String> attachWailaHead(List<String> currenttip) {
+        LogHelper.info("Attach Head: " + currenttip);
+
+        currenttip.clear(); //Try to clean before attach
+
         String tooltip;
         switch (tier) {
             case 0:
@@ -377,7 +382,7 @@ public class TileChargeStation extends TileEnergyHandler implements ISidedInvent
             workingStatus = SpecialChars.DGREEN + StatCollector.translateToLocal(Messages.Tooltips.WORKING);
         }
 
-        currenttip.set(0,
+        currenttip.add(
                 StatCollector.translateToLocal("tile" + "." + Reference.MOD_ID.toLowerCase() + ":" + Names.Blocks.CHARGE_STATION + ".name")
                         + " - " + tooltip);
         currenttip.add(String.format(StatCollector.translateToLocal(Messages.Tooltips.STATUS), workingStatus));

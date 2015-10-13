@@ -19,6 +19,7 @@
  */
 package it.kytech.smartccraft.tileentity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,10 +28,5 @@ import java.util.List;
 public class TileChargeStationMK4 extends TileChargeStation {
     public TileChargeStationMK4() {
         super(3);
-    }
-
-    @Override
-    public List<String> attachWailaHead(List<String> currenttip) {
-        return this.attachWailaHead(currenttip);
     }
 }
