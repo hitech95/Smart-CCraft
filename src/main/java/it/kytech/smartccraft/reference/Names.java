@@ -32,6 +32,13 @@ public class Names {
         public static final String CHARGE_STATION_2 = "chargeStationMK2";
         public static final String CHARGE_STATION_3 = "chargeStationMK3";
         public static final String CHARGE_STATION_4 = "chargeStationMK4";
+
+        public static final String CHARGE_PAD = "chargePad";
+        public static final String CHARGE_PAD_2 = "chargePadMK2";
+        public static final String CHARGE_PAD_3 = "chargePadMK3";
+        public static final String CHARGE_PAD_4 = "chargePadMK4";
+
+        public static final String PARTICLE = "particleBlock";
     }
 
     public static class Items {

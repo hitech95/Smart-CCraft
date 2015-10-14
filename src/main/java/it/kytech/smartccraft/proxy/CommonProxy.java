@@ -37,5 +37,6 @@ public abstract class CommonProxy implements IProxy {
         GameRegistry.registerTileEntity(TileChargeStationMK2.class, "tile." + Names.Blocks.CHARGE_STATION_2);
         GameRegistry.registerTileEntity(TileChargeStationMK3.class, "tile." + Names.Blocks.CHARGE_STATION_3);
         GameRegistry.registerTileEntity(TileChargeStationMK4.class, "tile." + Names.Blocks.CHARGE_STATION_4);
+        GameRegistry.registerTileEntity(TileChargePad.class, "tile." + Names.Blocks.CHARGE_PAD);
     }
 }

@@ -21,6 +21,7 @@ package it.kytech.smartccraft.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import it.kytech.smartccraft.block.*;
+import it.kytech.smartccraft.item.ItemBlockChargePad;
 import it.kytech.smartccraft.item.ItemBlockChargeStation;
 import it.kytech.smartccraft.item.ItemBlockFrame;
 import it.kytech.smartccraft.reference.Names;
@@ -33,6 +34,9 @@ public class BlocksLoader {
     public static final BlockDummySCC frameBlock = new BlockFrame();
     public static final BlockTileSCC assemblerBlock = new BlockAssembler();
     public static final BlockTileSCC chargeStation = new BlockChargeStation();
+    public static final BlockTileSCC chargePad = new BlockChargePad();
+
+    public static final BlockDummySCC particleBlock = new ParticleBlock();
 
     public static void init() {
         LogHelper.info("Registering Blocks");
@@ -40,5 +44,8 @@ public class BlocksLoader {
         GameRegistry.registerBlock(frameBlock, ItemBlockFrame.class, Names.Blocks.FRAME);
         GameRegistry.registerBlock(assemblerBlock, Names.Blocks.ASSEMBLER);
         GameRegistry.registerBlock(chargeStation, ItemBlockChargeStation.class, Names.Blocks.CHARGE_STATION);
+        GameRegistry.registerBlock(chargePad, ItemBlockChargePad.class, Names.Blocks.CHARGE_PAD);
+
+        GameRegistry.registerBlock(particleBlock, Names.Blocks.PARTICLE);
     }
 }
