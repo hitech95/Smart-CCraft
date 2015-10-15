@@ -43,8 +43,8 @@ public class Names {
 
     public static class Items {
         public static final String RAW_UPGRADE = "rawUpgrade";
-        public static final String SINGLE_UPGRADE = "singleUpgrade";
-        public static final String FINAL_UPGRADE = "finalUpgrade";
+        public static final String EFFICENCY_UPGRADE = "effUpgrade";
+        public static final String SPEED_UPGRADE = "speedUpgrade";
     }
 
     public static class NBT {
@@ -68,11 +68,13 @@ public class Names {
     public static class Containers {
         public static final String VANILLA_INVENTORY = "container.inventory";
         public static final String VANILLA_CRAFTING = "container.crafting";
+
         public static final String ASSEMBLER = "container.smartccraft:" + Blocks.ASSEMBLER;
+
         public static final String CHARGE_STATION = "container.smartccraft:" + Blocks.CHARGE_STATION;
-        public static final String CHARGE_STATION_2 = "container.smartccraft:" + Blocks.CHARGE_STATION_2;
-        public static final String CHARGE_STATION_3 = "container.smartccraft:" + Blocks.CHARGE_STATION_3;
-        public static final String CHARGE_STATION_4 = "container.smartccraft:" + Blocks.CHARGE_STATION_4;
+
+
+        public static final String CHARGE_PAD = "container.smartccraft:" + Blocks.CHARGE_PAD;
     }
 
     public static class Keys {

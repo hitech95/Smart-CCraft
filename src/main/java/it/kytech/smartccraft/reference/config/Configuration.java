@@ -17,39 +17,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package it.kytech.smartccraft.reference;
+package it.kytech.smartccraft.reference.config;
+
+import it.kytech.smartccraft.reference.config.original.Energy;
+import it.kytech.smartccraft.reference.config.original.Integration;
 
 /**
  * Created by M2K on 01/07/2014.
  */
-public class Settings {
+public class Configuration {
     //GENERAL Category
     public static final String GENERAL_CATEGORY = "general";
 
     //INTEGRATION Category
     public static final String INTEGRATION_CATEGORY = "integration";
-    //public static final String INTEGRATION_IC2 = "integrateIC2";
+
     public static final String INTEGRATION_BC = "integrateBC";
     public static final String INTEGRATION_TE = "integrateTE";
-    //public static final String INTEGRATION_MFR = "integrateMFR";
+    public static final String INTEGRATION_MFR = "integrateMFR";
 
-    //public static boolean integrateIC2 = false;
-    public static boolean integrateBC = true;
-    public static boolean integrateTE = true;
-    //public static boolean integrateMFR = false;
+    public static boolean integrateBC = Integration.DEFAULT_INTEGRATION_BC;
+    public static boolean integrateTE = Integration.DEFAULT_INTEGRATION_TE;
+    public static boolean integrateMFR = Integration.DEFAULT_INTEGRATION_MFR;
 
     //ENERGY Category
     public static final String ENERGY_CATEGORY = "energyStorage";
+
     public static final String ENERGY_PATH_STORAGE_ASSEMBLER = "storageAssembler";
     public static final String ENERGY_PATH_STORAGE_CHARGE_STATION = "storageChargeStation";
     public static final String ENERGY_PATH_RATIO_CHARGE_STATION = "ratioChargeStation";
     public static final String ENERGY_PATH_CONVERSION_RATIO_CHARGE_STATION = "conversionRatioChargeStation";
 
+    //Block Specific Configuration
     //Assembler
-    public static int storageAssembler = 50000;
+    public static int storageAssembler = Energy.DEFAULT_STORAGE_ASSEMBLER;
 
     //Charge Station
-    public static int storageChargeStation = 100;
-    public static int ratioChargeStation = 80;
-    public static int conversionRatioChargeStation = 60;
+    public static int storageChargeStation = Energy.DEFAULT_STORAGE_CHARGE_STATION;
+    public static int ratioChargeStation = Energy.DEFAULT_RATIO_CHARGE_STATION;
+    public static int conversionRatioChargeStation = Energy.DEFAULT_CONVERSION_RATIO_CHARGE_STATION;
+
+    //Charge Pad
+    public static int storageChargePad = Energy.DEFAULT_STORAGE_CHARGE_PAD;
+    public static int ratioChargePad = Energy.DEFAULT_RATIO_CHARGE_PAD;
+    public static int conversionRatioChargePad = Energy.DEFAULT_CONVERSION_RATIO_CHARGE_PAD;
 }

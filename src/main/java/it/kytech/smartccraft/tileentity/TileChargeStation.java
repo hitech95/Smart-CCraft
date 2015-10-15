@@ -29,10 +29,9 @@ import it.kytech.smartccraft.network.message.MessageTileChargeStation;
 import it.kytech.smartccraft.reference.Messages;
 import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.reference.Reference;
-import it.kytech.smartccraft.reference.Settings;
+import it.kytech.smartccraft.reference.config.Configuration;
 import it.kytech.smartccraft.util.helper.CCHelper;
 import it.kytech.smartccraft.util.IWailaDataDisplay;
-import it.kytech.smartccraft.util.helper.LogHelper;
 import mcp.mobius.waila.api.SpecialChars;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -58,7 +57,7 @@ public class TileChargeStation extends TileEnergyHandler implements ISidedInvent
     }
 
     public static int getMaxCharge(int tier) {
-        return Settings.storageChargeStation * (int) Math.pow(8, tier + 1);
+        return Configuration.storageChargeStation * (int) Math.pow(8, tier + 1);
     }
 
     private int tier;
@@ -77,7 +76,7 @@ public class TileChargeStation extends TileEnergyHandler implements ISidedInvent
         this.tier = tier;
         this.state = (byte) this.tier;
         status = STATES.IDLE;
-        this.energyStorage = new EnergyStorage(getMaxCharge(tier), Settings.ratioChargeStation * (int) Math.pow(2, tier + 1));
+        this.energyStorage = new EnergyStorage(getMaxCharge(tier), Configuration.ratioChargeStation * (int) Math.pow(2, tier + 1));
     }
 
     public int getTier() {
@@ -257,7 +256,7 @@ public class TileChargeStation extends TileEnergyHandler implements ISidedInvent
             int rate = (int) Math.pow((double) tier + 1, (double) 4);
             if (energyStorage.getEnergyStored() >= rate) {
                 int fuelAdded = addFuel(turtle, rate);
-                energyStorage.extractEnergy(fuelAdded * Settings.conversionRatioChargeStation, false);
+                energyStorage.extractEnergy(fuelAdded * Configuration.conversionRatioChargeStation, false);
 
                 if (fuelAdded == 0) {
                     setStatus(STATES.IDLE);

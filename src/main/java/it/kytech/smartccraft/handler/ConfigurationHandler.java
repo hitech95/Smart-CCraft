@@ -21,12 +21,11 @@ package it.kytech.smartccraft.handler;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import it.kytech.smartccraft.reference.Energy;
-import it.kytech.smartccraft.reference.Integration;
+import it.kytech.smartccraft.reference.config.original.Energy;
+import it.kytech.smartccraft.reference.config.original.Integration;
 import it.kytech.smartccraft.reference.Reference;
-import it.kytech.smartccraft.reference.Settings;
+import it.kytech.smartccraft.reference.config.Configuration;
 import it.kytech.smartccraft.util.helper.LogHelper;
-import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 
@@ -34,11 +33,11 @@ import java.io.File;
  * Created by M2K on 29/06/2014.
  */
 public class ConfigurationHandler {
-    public static Configuration configuration;
+    public static net.minecraftforge.common.config.Configuration configuration;
 
     public static void init(File configurationFile) {
         if (configuration == null) {
-            configuration = new Configuration(configurationFile);
+            configuration = new net.minecraftforge.common.config.Configuration(configurationFile);
             configuration.load();
 
             loadConfiguration();
@@ -49,32 +48,41 @@ public class ConfigurationHandler {
         LogHelper.info("Loading Config");
 
         try {
+            //Setup Config Category
             //General
-            configuration.setCategoryComment(Settings.GENERAL_CATEGORY, "General options");
-            configuration.setCategoryRequiresMcRestart(Settings.GENERAL_CATEGORY, false);
-            configuration.setCategoryRequiresWorldRestart(Settings.GENERAL_CATEGORY, true);
+            configuration.setCategoryComment(Configuration.GENERAL_CATEGORY, "General options");
+            configuration.setCategoryRequiresMcRestart(Configuration.GENERAL_CATEGORY, false);
+            configuration.setCategoryRequiresWorldRestart(Configuration.GENERAL_CATEGORY, true);
 
             //Integration
-            configuration.setCategoryComment(Settings.INTEGRATION_CATEGORY, "Integration Options, Require MC restart");
-            configuration.setCategoryRequiresMcRestart(Settings.INTEGRATION_CATEGORY, true);
-            configuration.setCategoryRequiresWorldRestart(Settings.INTEGRATION_CATEGORY, true);
+            configuration.setCategoryComment(Configuration.INTEGRATION_CATEGORY, "Integration Options, Require MC restart");
+            configuration.setCategoryRequiresMcRestart(Configuration.INTEGRATION_CATEGORY, true);
+            configuration.setCategoryRequiresWorldRestart(Configuration.INTEGRATION_CATEGORY, true);
 
-            Settings.integrateBC = configuration.get(Settings.INTEGRATION_CATEGORY, Settings.INTEGRATION_BC, Integration.DEFAULT_INTEGRATION_BC, "Integrate Buildcraft Iron Gear").getBoolean();
-            Settings.integrateTE = configuration.get(Settings.INTEGRATION_CATEGORY, Settings.INTEGRATION_TE, Integration.DEFAULT_INTEGRATION_TE, "Integrate Thermal Expansion Machine Frame").getBoolean();
-            //Settings.integrateMFR = configuration.get(Settings.INTEGRATION_CATEGORY, Settings.INTEGRATION_MFR, Integration.DEFAULT_INTEGRATION_MFR, "Add a Advanced Factory Machine Block, craft with iron instead of stone").getBoolean();
+            Configuration.integrateBC = configuration.get(Configuration.INTEGRATION_CATEGORY, Configuration.INTEGRATION_BC, Integration.DEFAULT_INTEGRATION_BC, "Integrate Buildcraft Iron Gear").getBoolean();
+            Configuration.integrateTE = configuration.get(Configuration.INTEGRATION_CATEGORY, Configuration.INTEGRATION_TE, Integration.DEFAULT_INTEGRATION_TE, "Integrate Thermal Expansion Machine Frame").getBoolean();
+            Configuration.integrateMFR = configuration.get(Configuration.INTEGRATION_CATEGORY, Configuration.INTEGRATION_MFR, Integration.DEFAULT_INTEGRATION_MFR, "Add a Advanced Factory Machine Block, craft with iron instead of stone").getBoolean();
 
             //Energy
-            configuration.setCategoryComment(Settings.ENERGY_CATEGORY, "Energy Options, Require World restart");
-            configuration.setCategoryRequiresMcRestart(Settings.ENERGY_CATEGORY, false);
-            configuration.setCategoryRequiresWorldRestart(Settings.ENERGY_CATEGORY, true);
+            configuration.setCategoryComment(Configuration.ENERGY_CATEGORY, "Energy Options, Require World restart");
+            configuration.setCategoryRequiresMcRestart(Configuration.ENERGY_CATEGORY, false);
+            configuration.setCategoryRequiresWorldRestart(Configuration.ENERGY_CATEGORY, true);
 
+
+
+            //Block Specific Configuration
             //Assembler
-            Settings.storageAssembler = configuration.get(Settings.ENERGY_CATEGORY, Settings.ENERGY_PATH_STORAGE_ASSEMBLER, Energy.DEFAULT_STORAGE_ASSEMBLER, "Energy Stored on Assembler").getInt();
+            Configuration.storageAssembler = configuration.get(Configuration.ENERGY_CATEGORY, Configuration.ENERGY_PATH_STORAGE_ASSEMBLER, Energy.DEFAULT_STORAGE_ASSEMBLER, "Energy Stored on Assembler").getInt();
 
             //Charge Station
-            Settings.storageChargeStation = configuration.get(Settings.ENERGY_CATEGORY, Settings.ENERGY_PATH_STORAGE_CHARGE_STATION, Energy.DEFAULT_STORAGE_CHARGE_STATION, "Energy Stored on Charge Station MK1").getInt();
-            Settings.ratioChargeStation = configuration.get(Settings.ENERGY_CATEGORY, Settings.ENERGY_PATH_RATIO_CHARGE_STATION, Energy.DEFAULT_RATIO_CHARGE_STATION, "Energy ratio on Charge Station MK1").getInt();
-            Settings.conversionRatioChargeStation = configuration.get(Settings.ENERGY_CATEGORY, Settings.ENERGY_PATH_CONVERSION_RATIO_CHARGE_STATION, Energy.DEFAULT_CONVERSION_RATIO_CHARGE_STATION, "Amount of RF per turtle fuel value").getInt();
+            Configuration.storageChargeStation = configuration.get(Configuration.ENERGY_CATEGORY, Configuration.ENERGY_PATH_STORAGE_CHARGE_STATION, Energy.DEFAULT_STORAGE_CHARGE_STATION, "Energy Stored on Charge Station MK1").getInt();
+            Configuration.ratioChargeStation = configuration.get(Configuration.ENERGY_CATEGORY, Configuration.ENERGY_PATH_RATIO_CHARGE_STATION, Energy.DEFAULT_RATIO_CHARGE_STATION, "Energy ratio on Charge Station MK1").getInt();
+            Configuration.conversionRatioChargeStation = configuration.get(Configuration.ENERGY_CATEGORY, Configuration.ENERGY_PATH_CONVERSION_RATIO_CHARGE_STATION, Energy.DEFAULT_CONVERSION_RATIO_CHARGE_STATION, "Amount of RF per turtle fuel value").getInt();
+
+            //Charge Pad
+            Configuration.storageChargePad = configuration.get(Configuration.ENERGY_CATEGORY, Configuration.ENERGY_PATH_STORAGE_CHARGE_STATION, Energy.DEFAULT_STORAGE_CHARGE_PAD, "Energy Stored on Charge Pad MK1").getInt();
+            Configuration.ratioChargePad = configuration.get(Configuration.ENERGY_CATEGORY, Configuration.ENERGY_PATH_RATIO_CHARGE_STATION, Energy.DEFAULT_RATIO_CHARGE_PAD, "Energy ratio on Charge Station MK1").getInt();
+            Configuration.conversionRatioChargePad = configuration.get(Configuration.ENERGY_CATEGORY, Configuration.ENERGY_PATH_CONVERSION_RATIO_CHARGE_STATION, Energy.DEFAULT_CONVERSION_RATIO_CHARGE_PAD, "Amount of RF to RF (Wireless Efficency)").getInt();
 
         } catch (Exception e) {
             LogHelper.warn("Config File not found...");

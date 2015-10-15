@@ -7,7 +7,7 @@ key.categories.scc=Smart CCraft
 tile.smartccraft:frameBlock.name=Frame Block
 tile.smartccraft:assemblerBlock.name=Assembly Station [WIP]
 tile.smartccraft:chargeStation.name=Charge Station
-tile.smartccraft:chargePad.name=Charge Station
+tile.smartccraft:chargePad.name=Charge Pad
 
 # Tooltip localizations
 #General

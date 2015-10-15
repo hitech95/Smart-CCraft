@@ -21,7 +21,7 @@ package it.kytech.smartccraft.init;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-import it.kytech.smartccraft.reference.Settings;
+import it.kytech.smartccraft.reference.config.Configuration;
 import it.kytech.smartccraft.util.helper.LogHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -47,7 +47,7 @@ public class RecipesLoader {
         ));
 
         //TODO: Add recipes...
-        if (Settings.integrateTE && Loader.isModLoaded("ThermalExpansion")) {
+        if (Configuration.integrateTE && Loader.isModLoaded("ThermalExpansion")) {
             //GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlocksLoader.chargeStation), "rlr", "lcl", "rer", 'r', "dustRedstone", 'l', "ingotLead", 'c', new ItemStack(GameRegistry.findItem("ThermalExpansion", "capacitor"), 1, 2), 'e', new ItemStack(GameRegistry.findItem("ThermalExpansion", "material"), 1, 3)));
 
             //MK1
@@ -98,7 +98,7 @@ public class RecipesLoader {
                     'e', "gearEnderium"
             ));
 
-        } else if (Settings.integrateBC && Loader.isModLoaded("BuildCraft|Core")) {
+        } else if (Configuration.integrateBC && Loader.isModLoaded("BuildCraft|Core")) {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlocksLoader.chargeStation),
                     "rlr",
                     "lcl",
