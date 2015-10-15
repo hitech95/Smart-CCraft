@@ -25,37 +25,31 @@ import java.util.List;
  */
 public class TileChargePad extends TileEnergyHandler implements ISidedInventory, IWailaDataDisplay {
 
-    public enum STATES {
-        RUNNING,
-        IDLE
+    private int tier;
+    private STATES status;
+    private EnergyStorage energyStorage;
+    private ItemStack[] inventory;
+
+    public TileChargePad() {
+        this(0);
+    }
+    public TileChargePad(int mTier) {
+        inventory = new ItemStack[1];
+        status = STATES.IDLE;
+        tier = mTier;
+
+        energyStorage = new EnergyStorage(getMaxCharge(tier), getMaxTransfer(tier));
+
+        this.orientation = ForgeDirection.UP;
+        this.state = (byte) this.tier;
     }
 
     public static int getMaxCharge(int tier) {
         return Configuration.storageChargePad * (int) Math.pow(10, tier);
     }
 
-    public static int getMaxTier(int tier) {
+    public static int getMaxTransfer(int tier) {
         return Configuration.ratioChargePad * (int) Math.pow(2, tier);
-    }
-
-    private int tier;
-    private STATES status;
-    private EnergyStorage energyStorage;
-
-    private ItemStack[] inventory;
-
-    public TileChargePad() {
-        this(0);
-    }
-
-    public TileChargePad(int mTier) {
-        inventory = new ItemStack[1];
-        status = STATES.IDLE;
-        tier = mTier;
-        energyStorage = new EnergyStorage(getMaxCharge(tier), getMaxTier(tier));
-
-        this.orientation = ForgeDirection.UP;
-        this.state = (byte) this.tier;
     }
 
     public int getTier() {
@@ -173,7 +167,6 @@ public class TileChargePad extends TileEnergyHandler implements ISidedInventory,
     public void closeInventory() {
 
     }
-
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
@@ -318,5 +311,10 @@ public class TileChargePad extends TileEnergyHandler implements ISidedInventory,
     @Override
     public List<String> attachWailaTail(List<String> currenttip) {
         return currenttip;
+    }
+
+    public enum STATES {
+        RUNNING,
+        IDLE
     }
 }

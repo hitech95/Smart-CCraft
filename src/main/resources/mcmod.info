@@ -11,7 +11,7 @@
   "credits": "The Forge and all other guys, for making forge API and Libs. Special tanks to pahimar for the tutorial!",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
-  "requiredMods": ["Forge","ComputerCraft"],
+  "dependencies": [],
+  "requiredMods": ["Forge","ComputerCraft", "CoFHCore"]
 }
 ]

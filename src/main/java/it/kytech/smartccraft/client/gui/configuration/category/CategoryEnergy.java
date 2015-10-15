@@ -42,7 +42,7 @@ public class CategoryEnergy extends CategoryEntry {
     protected GuiScreen buildChildScreen() {
         return new GuiConfig(
                 this.owningScreen,
-                new ConfigElement(ConfigurationHandler.configuration.getCategory(Configuration.ENERGY_CATEGORY)).getChildElements(),
+                new ConfigElement(ConfigurationHandler.configuration.getCategory(Configuration.Category.ENERGY.name)).getChildElements(),
                 Reference.MOD_ID,
                 this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
                 this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,

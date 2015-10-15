@@ -42,7 +42,7 @@ public class CategoryGeneral extends CategoryEntry {
     protected GuiScreen buildChildScreen() {
         return new GuiConfig(
                 this.owningScreen,
-                new ConfigElement(ConfigurationHandler.configuration.getCategory(Configuration.GENERAL_CATEGORY)).getChildElements(),
+                new ConfigElement(ConfigurationHandler.configuration.getCategory(Configuration.Category.GENERAL.name)).getChildElements(),
                 Reference.MOD_ID,
                 this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
                 this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,

@@ -203,7 +203,7 @@ public class BlockChargePad extends BlockTileSCC implements ITileEntityProvider,
 
     @SideOnly(Side.CLIENT)
     protected Color getParticleColour(Random random, int tier) {
-        float red = (random.nextBoolean()) ? random.nextFloat() * 0.1F : 0F;
+        float red = (random.nextBoolean()) ? random.nextFloat() * 0.5F : 0F;
         float gb = 0.6F;
         return new Color(red, gb + random.nextFloat() * 0.4F, gb + random.nextFloat() * 0.4F);
     }

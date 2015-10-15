@@ -26,27 +26,40 @@ import it.kytech.smartccraft.reference.config.original.Integration;
  * Created by M2K on 01/07/2014.
  */
 public class Configuration {
-    //GENERAL Category
-    public static final String GENERAL_CATEGORY = "general";
 
-    //INTEGRATION Category
-    public static final String INTEGRATION_CATEGORY = "integration";
+    public enum Category {
+        GENERAL("general"),
+        INTEGRATION("integration"),
+        ENERGY("energy");
 
-    public static final String INTEGRATION_BC = "integrateBC";
-    public static final String INTEGRATION_TE = "integrateTE";
-    public static final String INTEGRATION_MFR = "integrateMFR";
+        public final String name;
 
+        private Category(String slug) {
+            name = slug;
+        }
+    }
+
+    public final class Path {
+        public static final String INTEGRATION_BC = "integrateBC";
+        public static final String INTEGRATION_TE = "integrateTE";
+        public static final String INTEGRATION_MFR = "integrateMFR";
+
+        public static final String ENERGY_STORAGE_ASSEMBLER = "storageAssembler";
+
+        public static final String ENERGY_STORAGE_CHARGE_STATION = "storageChargeStation";
+        public static final String ENERGY_RATIO_CHARGE_STATION = "ratioChargeStation";
+        public static final String ENERGY_CONVERSION_RATIO_CHARGE_STATION = "conversionRatioChargeStation";
+
+        public static final String ENERGY_STORAGE_CHARGE_PAD = "storageChargePad";
+        public static final String ENERGY_RATIO_CHARGE_PAD = "ratioChargePad";
+        public static final String ENERGY_CONVERSION_RATIO_CHARGE_PAD = "conversionRatioChargePad";
+
+    }
+
+    //Integration
     public static boolean integrateBC = Integration.DEFAULT_INTEGRATION_BC;
     public static boolean integrateTE = Integration.DEFAULT_INTEGRATION_TE;
     public static boolean integrateMFR = Integration.DEFAULT_INTEGRATION_MFR;
-
-    //ENERGY Category
-    public static final String ENERGY_CATEGORY = "energyStorage";
-
-    public static final String ENERGY_PATH_STORAGE_ASSEMBLER = "storageAssembler";
-    public static final String ENERGY_PATH_STORAGE_CHARGE_STATION = "storageChargeStation";
-    public static final String ENERGY_PATH_RATIO_CHARGE_STATION = "ratioChargeStation";
-    public static final String ENERGY_PATH_CONVERSION_RATIO_CHARGE_STATION = "conversionRatioChargeStation";
 
     //Block Specific Configuration
     //Assembler
