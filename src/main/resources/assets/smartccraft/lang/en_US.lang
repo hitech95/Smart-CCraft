@@ -19,14 +19,16 @@ tooltip.smartccraft:notWorking=Not Working
 #Machines
 tooltip.smartccraft:frameBlock=Used to craft Machines
 tooltip.smartccraft:assemblerBlock=3x3 or 2x2 crafter
+
 tooltip.smartccraft:chargeStation=MK1
 tooltip.smartccraft:chargeStationMK2=MK2
 tooltip.smartccraft:chargeStationMK3=MK3
 tooltip.smartccraft:chargeStationMK4=MK4
-tooltip.smartccraft:chargePad=MK1
-tooltip.smartccraft:chargePadMK2=MK2
-tooltip.smartccraft:chargePadMK3=MK3
-tooltip.smartccraft:chargePadMK4=MK4
+
+tooltip.smartccraft:chargePad=Basic
+tooltip.smartccraft:chargePadMK2=Hardened
+tooltip.smartccraft:chargePadMK3=Reinforced
+tooltip.smartccraft:chargePadMK4=Resonant
 
 # GUI localizations
 # Inventory

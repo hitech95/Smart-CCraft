@@ -16,10 +16,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -39,10 +41,11 @@ public class BlockChargePad extends BlockTileSCC implements ITileEntityProvider,
     private IIcon[] blockIconFront;
     @SideOnly(Side.CLIENT)
     private IIcon[] blockIconFrontEnabled;
+
     @SideOnly(Side.CLIENT)
-    private IIcon[] blockIconSide;
+    private IIcon blockIconSide;
     @SideOnly(Side.CLIENT)
-    private IIcon[] blockIconBottom;
+    private IIcon blockIconBottom;
 
     public BlockChargePad() {
         super(Material.rock);
@@ -89,14 +92,12 @@ public class BlockChargePad extends BlockTileSCC implements ITileEntityProvider,
 
         blockIconFront = new IIcon[TIER_COUNT];
         blockIconFrontEnabled = new IIcon[TIER_COUNT];
-        blockIconSide = new IIcon[TIER_COUNT];
-        blockIconBottom = new IIcon[TIER_COUNT];
 
         for (int meta = 0; meta < 4; meta++) {
             blockIconFrontEnabled[meta] = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName()) + "_" + meta + "_top" + "_active"));
             blockIconFront[meta] = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName()) + "_" + meta + "_top"));
-            blockIconBottom[meta] = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName()) + "_" + meta + "_bottom"));
-            blockIconSide[meta] = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())) + "_" + meta);
+            blockIconBottom = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName()) + "_bottom"));
+            blockIconSide = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
         }
     }
 
@@ -111,6 +112,8 @@ public class BlockChargePad extends BlockTileSCC implements ITileEntityProvider,
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
+        LogHelper.info("Update Render Textures");
+
         if ((tileEntity instanceof TileChargePad)) {
             TileChargePad tileChargePad = (TileChargePad) tileEntity;
             return getIcon(side, tileChargePad.getTier(), tileChargePad.isWorking());
@@ -122,11 +125,11 @@ public class BlockChargePad extends BlockTileSCC implements ITileEntityProvider,
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta, boolean enabled) {
         if (side == 0) {
-            return blockIconBottom[meta];
+            return blockIconBottom;
         } else if (side == 1) {
             return (enabled) ? blockIconFrontEnabled[meta] : blockIconFront[meta];
         } else {
-            return blockIconSide[meta];
+            return blockIconSide;
         }
     }
 
@@ -148,6 +151,60 @@ public class BlockChargePad extends BlockTileSCC implements ITileEntityProvider,
         }
 
         return true;
+    }
+
+    /**
+     * Ticks the block if it's been scheduled
+     */
+    @Override
+    public void updateTick(World world, int x, int y, int z, Random random) {
+        LogHelper.info("UpdateTick");
+        if (!world.isRemote) {
+            updatePadStatus(world, x, y, z);
+        }
+    }
+
+    /**
+     * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
+     */
+    @Override
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+        LogHelper.info("EntityCollide");
+        if (!world.isRemote) {
+            updatePadStatus(world, x, y, z);
+        }
+    }
+
+    protected void updatePadStatus(World world, int x, int y, int z) {
+        if (!(world.getTileEntity(x, y, z) instanceof TileChargePad)) {
+            return;
+        }
+
+        TileChargePad tileChargePad = (TileChargePad) world.getTileEntity(x, y, z);
+        boolean active = !tileChargePad.isDisabled();
+        boolean newActive = entityCollideWithPad(world, x, y, z);
+
+        if (active != newActive) {
+            tileChargePad.setEntity(newActive);
+            world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
+        }
+
+        LogHelper.info("Update Status: " + active + ";" + newActive);
+
+        if (!active && newActive) {
+            world.playSoundEffect((double) x + 0.5D, (double) y + 0.1D, (double) z + 0.5D, "random.click", 0.3F, 0.5F);
+        } else if (active && !newActive) {
+            world.playSoundEffect((double) x + 0.5D, (double) y + 0.1D, (double) z + 0.5D, "random.click", 0.3F, 0.6F);
+        }
+    }
+
+    protected boolean entityCollideWithPad(World world, int x, int y, int z) {
+        return !world.getEntitiesWithinAABB(EntityPlayer.class, getBoundingBox(x, y, z)).isEmpty();
+    }
+
+    protected AxisAlignedBB getBoundingBox(int x, int y, int z) {
+        float margin = 0.125F;
+        return AxisAlignedBB.getBoundingBox(x + margin, y, z + margin, x + 1 - margin, y + 0.5D, z + 1 - margin);
     }
 
     @SideOnly(Side.CLIENT)

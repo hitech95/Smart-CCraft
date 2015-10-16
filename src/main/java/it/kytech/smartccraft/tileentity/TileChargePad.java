@@ -9,6 +9,7 @@ import it.kytech.smartccraft.reference.Names;
 import it.kytech.smartccraft.reference.Reference;
 import it.kytech.smartccraft.reference.config.Configuration;
 import it.kytech.smartccraft.util.IWailaDataDisplay;
+import it.kytech.smartccraft.util.helper.LogHelper;
 import mcp.mobius.waila.api.SpecialChars;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -33,6 +34,7 @@ public class TileChargePad extends TileEnergyHandler implements ISidedInventory,
     public TileChargePad() {
         this(0);
     }
+
     public TileChargePad(int mTier) {
         inventory = new ItemStack[1];
         status = STATES.IDLE;
@@ -72,6 +74,16 @@ public class TileChargePad extends TileEnergyHandler implements ISidedInventory,
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, status.ordinal());
             this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
         }
+    }
+
+    public boolean isDisabled() {
+        return status == STATES.NO_ENTITY;
+    }
+
+    public void setEntity(boolean hasEntity) {
+        setStatus((hasEntity) ? STATES.IDLE : STATES.NO_ENTITY);
+
+        LogHelper.info("TileChargePad, hasEntity: " + hasEntity);
     }
 
     @Override
@@ -186,6 +198,12 @@ public class TileChargePad extends TileEnergyHandler implements ISidedInventory,
                     energyContainerItem.extractEnergy(battery, energyStorage.receiveEnergy(charge, false), false);
                 }
             }
+
+            //LogHelper.info("Status:" + status.name());
+
+            if (status == STATES.IDLE) {
+                setStatus(STATES.RUNNING);
+            }
         }
     }
 
@@ -295,7 +313,7 @@ public class TileChargePad extends TileEnergyHandler implements ISidedInventory,
         }
 
         currenttip.add(
-                StatCollector.translateToLocal("tile" + "." + Reference.MOD_ID.toLowerCase() + ":" + Names.Blocks.CHARGE_PAD+ ".name")
+                StatCollector.translateToLocal("tile" + "." + Reference.MOD_ID.toLowerCase() + ":" + Names.Blocks.CHARGE_PAD + ".name")
                         + " - " + tooltip);
         currenttip.add(String.format(StatCollector.translateToLocal(Messages.Tooltips.STATUS), workingStatus));
 
@@ -315,6 +333,7 @@ public class TileChargePad extends TileEnergyHandler implements ISidedInventory,
 
     public enum STATES {
         RUNNING,
-        IDLE
+        IDLE,
+        NO_ENTITY
     }
 }
