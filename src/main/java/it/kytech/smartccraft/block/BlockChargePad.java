@@ -77,6 +77,13 @@ public class BlockChargePad extends BlockTileSCC implements ITileEntityProvider,
         }
     }
 
+    /**
+     * How many world ticks before ticking
+     */
+    public int tickRate(World p_149738_1_) {
+        return 20;
+    }
+
     @Override
     public int damageDropped(int metaData) {
         return metaData;
@@ -184,17 +191,22 @@ public class BlockChargePad extends BlockTileSCC implements ITileEntityProvider,
         boolean active = !tileChargePad.isDisabled();
         boolean newActive = entityCollideWithPad(world, x, y, z);
 
-        if (active != newActive) {
-            tileChargePad.setEntity(newActive);
-            world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
-        }
-
         LogHelper.info("Update Status: " + active + ";" + newActive);
 
-        if (!active && newActive) {
+        if (active != newActive) {
+            tileChargePad.setEntity(newActive);
+        } else {
+            return;
+        }
+
+        if (active && !newActive) {
             world.playSoundEffect((double) x + 0.5D, (double) y + 0.1D, (double) z + 0.5D, "random.click", 0.3F, 0.5F);
-        } else if (active && !newActive) {
+        } else if (!active && newActive) {
             world.playSoundEffect((double) x + 0.5D, (double) y + 0.1D, (double) z + 0.5D, "random.click", 0.3F, 0.6F);
+        }
+
+        if (newActive) {
+            world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
         }
     }
 
@@ -207,37 +219,32 @@ public class BlockChargePad extends BlockTileSCC implements ITileEntityProvider,
         return AxisAlignedBB.getBoundingBox(x + margin, y, z + margin, x + 1 - margin, y + 0.5D, z + 1 - margin);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        spawnParticles(world, x, y, z, random);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void spawnParticles(World world, int blockX, int blockY, int blockZ, Random rand) {
-
         ForgeDirection orientation = ForgeDirection.UP;
         EffectRenderer render = FMLClientHandler.instance().getClient().effectRenderer;
         int maxMultParticles = 3;
 
-        if (!(world.getTileEntity(blockX, blockY, blockZ) instanceof TileChargePad)) {
+        if (!(world.getTileEntity(x, y, z) instanceof TileChargePad)) {
             return;
         }
-        TileChargePad tile = (TileChargePad) world.getTileEntity(blockX, blockY, blockZ);
+        TileChargePad tile = (TileChargePad) world.getTileEntity(x, y, z);
 
         if (tile.isWorking()) {
             for (int multParticles = 0; multParticles < maxMultParticles; multParticles++) {
-                for (int particles = getParticleCount(rand); particles > 0; particles--) {
-                    double dX = blockX + (rand.nextFloat() - 0.5F) + (CenterFaceHelper.getFace(orientation.ordinal()).offsetX);
-                    double dY = blockY + (CenterFaceHelper.getFace(orientation.ordinal()).offsetY) + rand.nextFloat() - 0.95F;
-                    double dZ = blockZ + (rand.nextFloat() - 0.5F) + (CenterFaceHelper.getFace(orientation.ordinal()).offsetZ);
+                for (int particles = getParticleCount(random); particles > 0; particles--) {
+                    double dX = x + (random.nextFloat() - 0.5F) + (CenterFaceHelper.getFace(orientation.ordinal()).offsetX);
+                    double dY = y + (CenterFaceHelper.getFace(orientation.ordinal()).offsetY) + random.nextFloat() - 0.95F;
+                    double dZ = z + (random.nextFloat() - 0.5F) + (CenterFaceHelper.getFace(orientation.ordinal()).offsetZ);
 
-                    MoveVector movement = getParticleVelocity(rand);
+                    MoveVector movement = getParticleVelocity(random);
 
                     if (particles % 2 == 0) {
                         movement.multiplyComponents(1D, 0.55D, 1D);
                     }
-                    Color color = getParticleColour(rand, tile.getTier());
-                    render.addEffect(new EntityChargePadAuraFX(world, dX, dY, dZ, getParticleMaxAge(rand), movement, color));
+                    Color color = getParticleColour(random, tile.getTier());
+                    render.addEffect(new EntityChargePadAuraFX(world, dX, dY, dZ, getParticleMaxAge(random), movement, color));
                 }
             }
         }

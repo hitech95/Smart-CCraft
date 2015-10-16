@@ -37,13 +37,13 @@ public class TileChargePad extends TileEnergyHandler implements ISidedInventory,
 
     public TileChargePad(int mTier) {
         inventory = new ItemStack[1];
-        status = STATES.IDLE;
+        status = STATES.NO_ENTITY;
         tier = mTier;
 
         energyStorage = new EnergyStorage(getMaxCharge(tier), getMaxTransfer(tier));
 
-        this.orientation = ForgeDirection.UP;
-        this.state = (byte) this.tier;
+        orientation = ForgeDirection.UP;
+        state = (byte) this.tier;
     }
 
     public static int getMaxCharge(int tier) {
